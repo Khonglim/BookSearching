@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Book_SEC;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     /**
@@ -11,10 +13,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +21,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $codewold = DB::table('floor')->get();
+        $data = array('codewold'=> $codewold);
+        return view('home' ,$data);
+
+
     }
+
+    public function destroy()
+    {
+
+      return "ok";
+
+
+    }
+
+
+
+
 }

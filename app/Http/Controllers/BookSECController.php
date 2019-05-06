@@ -13,9 +13,8 @@ class BookSECController extends Controller
      */
     public function index()
     {
-        $book = Book_SEC::all();
-        $data = array( 'book'=>$book );
-        return view('showe',$data);
+
+        return view('welcome');
     }
 
     /**
@@ -36,7 +35,37 @@ class BookSECController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ch = curl_init();
+
+        // set url
+      $url = "http://202.28.17.35/api4lib/api/index.php/GetListOfItmesFromCallNoRange/%7CaQA/%7CaQZ9/bcm";
+    // echo $url;
+        curl_setopt($ch, CURLOPT_URL,$url);
+
+        //return the transfer as a string
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        // $output contains the output string
+        $output = json_decode(curl_exec($ch));
+        curl_close($ch);
+     //print_r($output);
+       // echo $output;
+        // close curl resource to free up system resources
+
+        $k =  $request->book;
+        $arrayName = array('output' => $output->ListOfItemsFromCallNoRange,
+                            'k' => $k
+
+                            );
+
+
+
+
+
+
+        //print_r($count);
+
+        return view('showese', $arrayName);;
     }
 
     /**

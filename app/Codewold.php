@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Book_SEC extends Model
+class Codewold extends Model
 {
-    protected $table = 'groceries';
+    protected $table = 'images';
 }
