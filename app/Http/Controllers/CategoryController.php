@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 use Illuminate\Support\Facades\DB;
-use App\Extensions\MongoSessionStore;
 use Illuminate\Support\Facades\Session;
-class ShelfChangeController extends Controller
+
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +16,10 @@ class ShelfChangeController extends Controller
      */
     public function index()
     {
+        $category= Category::all();
+         $data = array('category' => $category  );
 
-
-        $code = DB::table('floor')->get();
-        $bookshelf = DB::table('bookshelf')->get();
-        $data = array('code'=> $code,'bookshelf' =>  $bookshelf);
-        return view('home' ,$data);
+        return view("category",$data);
     }
 
     /**
@@ -30,8 +29,6 @@ class ShelfChangeController extends Controller
      */
     public function create()
     {
-        return view('floor.addFloor');
-
         //
     }
 
@@ -44,9 +41,15 @@ class ShelfChangeController extends Controller
     public function store(Request $request)
     {
 
-        DB::insert('insert into floor (floor) values ("'.$request->floor.'")');
-        Session::flash('flash_message','บันทึกข้อมูลจังหวัดสำเร็จ!! ');
-        return redirect('home');
+        $category  =   new Category;
+        $category->floor_id =  $request->floor_id;
+        $category->shelf =  $request->shelf;
+        $category->call_b =  $request->call_b;
+        $category->save();
+
+        Session::flash('flash_message','เพิ่มข้อมูลสำเร็จ!! ');
+        return redirect('category');
+
     }
 
     /**
@@ -57,7 +60,7 @@ class ShelfChangeController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -68,9 +71,7 @@ class ShelfChangeController extends Controller
      */
     public function edit($id)
     {
-
-
-
+        //
     }
 
     /**
@@ -82,11 +83,11 @@ class ShelfChangeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('floor')
+        DB::table('location_book')
         ->where('id', $id)
-        ->update(['floor' => $request->floor]);
-        Session::flash('flash_message','แก้ไขข้อมูลจังหวัดสำเร็จ!! ');
-        return redirect('home');
+        ->update(['floor_id' => $request->floor_id, 'shelf' => $request->shelf,'call_b' => $request->call_b]);
+        Session::flash('flash_message','แก้ไขข้อมูลสำเร็จ!! ');
+        return redirect('category');
     }
 
     /**
@@ -97,19 +98,8 @@ class ShelfChangeController extends Controller
      */
     public function destroy($id)
     {
-        $floor = DB::table('floor') ->where('floor', '>', $id)->get();
-
-         DB::table('floor')->where('floor', '=',$id)->delete();
-         foreach ($floor as $p){
-            DB::table('floor')
-            ->where('floor', '=',$p->floor)
-            ->update(['floor' =>$p->floor-1]);
-
-        }
-
-
-       //  Session::flash('flash_message','ลบข้อมูลจังหวัดสำเร็จ!! ');
-
-         return redirect('home');
+      DB::table('location_book') ->where('id', '=', $id)->delete();
+      Session::flash('flash_message','ลบข้อมูลสำเร็จ!! ');
+      return redirect('category');
     }
 }

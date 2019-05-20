@@ -44,14 +44,47 @@ margin-left: -200px;
         text-align:center;
     }
     </style>
+
+
+
+<style type="text/css">
+    html,body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+    #overlay {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background: #ccc;
+        width: 100%;
+        height: 100%;
+        opacity: .75;
+        filter: alpha(opacity=75);
+        -moz-opacity: .75;
+        z-index: 999;
+        background: #fff url(images/loading.gif) 50% 50% no-repeat;
+    }
+    .main-contain{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    </style>
 </head>
 <body class="hold-transition skin-purple  layout-top-nav">
+        <div id="overlay"></div>
 <div class="wrapper">
   <header class="main-header">
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../../index2.html" class="navbar-brand">BookSearching</a>
+          <a href="{{url('/')}}" class="navbar-brand">BookSearching</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -59,8 +92,6 @@ margin-left: -200px;
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#"> <i class=" fa fa-folder-open"></i> รายการทั้งหมด <span class="sr-only">(current)</span></a></li>
-            <li><a href="#"> <i class=" fa  fa-cubes "></i>   สืบค้นตามประเภท</a></li>
-            <li><a href="#"> <i class=" fa  fa-users "></i>    สืบค้นตามผู้แต่ง</a></li>
             <li><a href="#"> <i class=" fa  fa-newspaper-o "></i> สืบค้นตามปีพิมพ์</a></li>
           </ul>
         </div>
@@ -69,73 +100,28 @@ margin-left: -200px;
   </header>
   <div class="content-wrapper">
     <div class="container">
+        <br>
+    <a href="{{url('/')}}" class="btn btn-primary"  >ย้อนกลับ</a>
       <section class="content-header">
         <h1>
           ค้นหาหนังสือบนชั้นวาง   คำที่คุณค้นหา  {{$k}}
         </h1>
       </section>
       <section class="content">
-            <table id="example" class=" table table-hover table-striped">
-                    <thead>
-                            <tr>
-                                <td class="col-md-1 text-center">#</td>
-                                <td class="col-md-1"></td>
-                                <td class="col-md-10">ชื่อเรื่อง</td>
-                                <td>ตำแหน่ง</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php  $i=1; ?>
-         @foreach ( $output as  $outputs)
-         <?php  $e=explode("|",$outputs->call_number);
-                       $cut=substr($e[1],1);
-                       $c=explode(".", $cut);
-         ?>
-         @if (preg_match("/^[ก-๙]+$/", $outputs->best_author))
-                      ok
-            @endif
-                 <tr>
-                     <td >
-                         {{$i++}}
-                     </td>
-                     <td>
-                            <i class="fa fa-book fa-4x text-primary"></i>
-                     </td>
-                     <td>
-                     <h4 class="media-heading">{{ $outputs->best_title}}</h4>
-                            <strong>ผู้แต่ง</strong> :{{ $outputs->best_author}} <br/>
-                            <strong>ปีที่พิมพ์ </strong>:{{ $outputs->publish_year}} <br>
-                            <strong>หมวด </strong> :{{ $c[0]}}
-                     </td>
-                     <td>
-                        <a  class="btn btn-primary btn-xs">     <i class="fa  fa-search-plus fa-4x " data-toggle="modal" data-target="#myModal{{ $outputs->id}}"  ></i> </a>
-                            <div class="modal fade" id="myModal{{ $outputs->id}}" role="dialog">
-                                <div class="modal-dialog modal-lg">
-                                     <div class="modal-content">
-                                        <div class="modal-header">
-                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                          <h4 class="modal-title">Modal Header</h4>
-                                            </div>
-                                        <div class="modal-body">
+        <table id="category" class=" table table-hover table-striped">
+            <thead>
+            <tr>
+              <th>ชื่อหนังสือ</th>
+              <th>ผู้แต่ง</th>
+
+              <th>ตำแหน่ง</th>
+            </thead>
 
 
 
-                                                <a href="{{'locationShow/'.$c[0]}}" class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a>
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
-                                      </div>
 
-                                    </div>
-                                  </div>
 
-                     </td>
-                 </tr>
-         @endforeach
-
-                    </tbody>
-              </table>
+          </table>
 
                       <input type="hidden" class="form-control" id="customSearchBox" placeholder="Search book..."   >
                       <input type="hidden" class="form-control" id="users" placeholder="Search book..."   value="{{$k}}" >
@@ -172,14 +158,22 @@ margin-left: -200px;
 
 <script>
         $(document).ready(function() {
-                    var users = $('#example').DataTable({
-                        "dom": "t",
-                        "scrollY":        "500px",
-                        "scrollCollapse": true,
-                         "paging":        false,
+                    var users = $('#category').DataTable({
 
+                        "processing": true,
+                        "serverSide": true,
+                        "ajax": {
+                                  "url":"<?= route('bookapi') ?>",
+                                  "dataType":"json",
+                                  "type":"POST",
+                                  "data":{"_token":"<?= csrf_token() ?>"}
+                                },
+                        "columns":[
+                                {"data":"best_title"},
+                                {"data":"best_author"},
 
-                    });
+                                //{"data": 'action', name: 'action', orderable: false, searchable: false}
+                            ]});
                     var x = document.getElementById("users").value;
                     $('#customSearchBox').ready(function(){
                         users.search(x).draw() ;
@@ -187,6 +181,14 @@ margin-left: -200px;
                 } );
 
         </script>
+
+<script type="text/javascript">
+    $(function(){
+        $("#overlay").fadeOut();
+        $(".main-contain").removeClass("main-contain");
+    });
+    </script>
+
 
 </body>
 </html>

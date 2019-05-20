@@ -4,21 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book_SEC;
+use Yajra\Datatables\Datatables;
+use App\Bookapi;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 
@@ -29,15 +20,16 @@ class HomeController extends Controller
 
     }
 
-    public function destroy()
-    {
+    public function postdata(Request $request){
 
-      return "ok";
 
+        $book= Bookapi::all();
+        return datatables()->collection($book)->addColumn('action', function ($book) {
+            return '<a href="/locationShow/'.$book->callno.'" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i></a>
+                ';})->toJson();
 
     }
 
 
-
-
+  
 }

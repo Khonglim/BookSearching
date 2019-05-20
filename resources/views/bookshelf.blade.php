@@ -4,12 +4,12 @@
 		<meta name="description" content="Drag and drop table content with JavaScript"/>
 		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{{asset('js/header.js')}}"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{asset('js/header.js')}}"></script>
 		<script type="text/javascript" src="{{asset('js/redips-drag-min.js')}}"></script>
-
 		<title>เเก้ไขตู้หนังสือ</title>
-
 		<style>
 		/*
 
@@ -35,20 +35,20 @@ div#redips-drag table {
 
 /* table cells */
 div#redips-drag td {
-	border: 1px solid navy;
-	height: 25px;
-	width: 11px;
+/*	border: 1px solid navy;*/
+	height: 80px;
+	width: 40px;
 	text-align: center;
 	font-size: 10pt;
-	padding: 2px;
+
 }
 
 /* drag object (DIV inside table cell) */
 .redips-drag {
 	margin: auto;
 	text-align: center;
-	width: 8px;
-	height: 22px;
+	width: 35px;
+	height: 75px;
 	line-height: 35px;
 	border: 2px solid SteelBlue;*
 	background-color: white;
@@ -57,10 +57,11 @@ div#redips-drag td {
 
 .map
             {
-                height:744px;
-                width:1341px;
-                 background-image:url('https://res.cloudinary.com/nio/image/upload/v1556548769/logo/map.jpg');
+                height:1080px;
+                width: 1920px;
+                 background-image:url('https://res.cloudinary.com/nio/image/upload/v1557385715/logo/map.jpg');
                 border: solid 1px #355681;
+
 
             }
 
@@ -76,12 +77,6 @@ div#redips-drag td {
 
 
 /* toggle checkboxes at the bottom */
-.checkbox {
-	margin-left: 13px;
-	margin-right: 14px;
-	width: 13px; /* needed for IE ?! */
-}
-
 
 /* message cell */
 .message_line {
@@ -90,1201 +85,429 @@ div#redips-drag td {
 	font-size: 10pt;
 	color: #888;
 }
+p.indent{
+    padding-left: 1em
+
+    }
 </style>
 	</head>
 	<body>
-		<center>
+
 
 		<div  class="map" id="MapBook" >
 			<div id="redips-drag">
-			<br><br><br><br><br><br><br>
+            <br><br><br><br>
+
+            <table id="table3">
+                    <colgroup><col width="100"/></colgroup>
+                    <tr style="background-color: #eee">
+                        <td><a href="{{url('/home')}}" class=" btn btn-primary">ย้อนกลับ</a></td>
+                        <td id="message" class="redips-mark" title="You can not drop here">Table3</td>
+                    <td><div id="d1" class="redips-drag t3 redips-clone" title="infinite cloning"></div> </td>
+                    <td><input type="button" value="บันทึก" class="btn btn-success" onclick="save('json')" /></td>
+                    </tr>
+
+
+
+                </table>
+
 				<table id="table1">
-					<colgroup>
-						<col width="11"/>
-						<col width="11"/>
-						<col width="11"/>
-						<col width="11"/>
-						<col width="11"/>
-						<col width="11"/>
-					</colgroup>
+
 					<tbody>
-						<tr>
-						    <td colspan="20">
-
-                            </td>
-						    <td  >
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==1 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-						    <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==2 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-				        	<td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==3 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==4 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==5 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==6 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==7 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==8 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==9 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==10 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==11 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==12 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==13 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==14 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==15 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==16 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==17 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==18 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==19 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==20 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==21 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==22 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==23 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==24 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==25 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==26 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==27 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==28 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==29 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==30 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==31 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==32 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==33 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==34 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==35 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==36 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==37 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-                            <td>
-                                @foreach ($codewold as $codewolds )
-                                @if($codewolds->row == 0 && $codewolds->cell ==38 )
-                            <div  class="redips-drag t1" title="infinite cloning">e</div>
-                            @endif
-                            @endforeach
-                            </td>
-
-
-
-
-
-						</tr>
-						<tr>
-                            <td colspan="19"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-
-
-
-
-						</tr>
-						<tr>
-                            <td colspan="17"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-
-
-
-
-
-
-
-                        </tr>
-                        <tr>
-                            <td colspan="15"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-
-
-
-
-                    </tr>
-                    <tr>
-                        <td colspan="13"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-
-
-
-
-                </tr>
-                <tr>
-                    <td colspan="10"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-
-                    </tr>
-                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            </tr>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==0 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==1 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==2 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==3 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==4 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==5 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==6 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==7 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==8 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==9 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==10 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==11 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==12 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==13 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==14 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==15 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==16 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==17 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==18 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==19 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==20 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==21 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==22 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==23 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==24 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==25 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==26 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==27 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==28 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==29 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==30 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==31 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==32 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==33 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==34 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==35 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==36 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==37 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==38 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==39 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==40 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==41 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==42 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==43 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==44 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==45 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==46 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==47 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==48 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==49 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==50 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
 
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
 
-                                            </tr>
+                                  </tr>
+
+
+                                  <tr>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==0 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==1 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==2 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==3 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==4 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==5 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==6 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==7 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==8 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==9 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==10 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==11 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==12 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==13 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==14 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==15 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==16 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==17 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==18 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==19 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==20 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==21 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==22 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==23 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==24 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==25 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==26 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==27 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==28 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==29 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==30 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==31 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==32 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==33 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==34 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==35 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==36 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==37 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==38 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==39 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==40 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==41 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==42 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==43 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==44 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==45 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==46 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==47 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==48 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==49 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 1 && $bookshelfs->cell ==50 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+
+
+                                  </tr>
+                                  <tr>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==0 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==1 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==2 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==3 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==4 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==5 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==6 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==7 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==8 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==9 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==10 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==11 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==12 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==13 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==14 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==15 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==16 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==17 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==18 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==19 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==20 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==21 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==22 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==23 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==24 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==25 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==26 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==27 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==28 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==29 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==30 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==31 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==32 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==33 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==34 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==35 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==36 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==37 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==38 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==39 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==40 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==41 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==42 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==43 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==44 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==45 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==46 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==47 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==48 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==49 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 2 && $bookshelfs->cell ==50 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+
+
+                                  </tr>
+                                  <tr>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==0 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==1 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==2 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==3 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==4 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==5 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==6 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==7 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==8 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==9 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==10 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==11 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==12 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==13 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==14 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==15 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==16 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==17 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==18 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==19 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==20 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==21 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==22 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==23 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==24 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==25 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==26 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==27 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==28 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==29 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==30 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==31 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==32 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==33 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==34 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==35 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==36 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==37 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==38 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==39 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==40 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==41 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==42 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==43 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==44 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==45 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==46 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==47 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==48 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==49 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 3 && $bookshelfs->cell ==50 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+
+
+                                  </tr>
+                                  <tr>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==0 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==1 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==2 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==3 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==4 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==5 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==6 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==7 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==8 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==9 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==10 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==11 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==12 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==13 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==14 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==15 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==16 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==17 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==18 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==19 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==20 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==21 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==22 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==23 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==24 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==25 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==26 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==27 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==28 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==29 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==30 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==31 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==32 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==33 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==34 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==35 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==36 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==37 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==38 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==39 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==40 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==41 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==42 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==43 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==44 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==45 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==46 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==47 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==48 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==49 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 4 && $bookshelfs->cell ==50 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+
+
+                                  </tr>
+                                  <tr>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==0 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==1 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==2 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==3 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==4 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==5 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==6 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==7 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==8 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==9 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==10 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==11 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==12 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==13 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==14 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==15 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==16 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==17 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==18 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==19 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==20 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==21 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==22 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==23 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==24 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==25 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==26 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==27 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==28 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==29 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==30 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==31 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==32 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==33 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==34 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==35 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==36 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==37 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==38 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==39 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==40 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==41 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==42 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==43 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==44 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==45 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==46 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==47 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==48 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==49 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 5 && $bookshelfs->cell ==50 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+
+
+                                  </tr>
+                                  <tr>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==0 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==1 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==2 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==3 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==4 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==5 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==6 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==7 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==8 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==9 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==10 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==11 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==12 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==13 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==14 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==15 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==16 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==17 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==18 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==19 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==20 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==21 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==22 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==23 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==24 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==25 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==26 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==27 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==28 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==29 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==30 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==31 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==32 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==33 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==34 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==35 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==36 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==37 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==38 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==39 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==40 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==41 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==42 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==43 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==44 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==45 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==46 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==47 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==48 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==49 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+                                    <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 6 && $bookshelfs->cell ==50 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
+
+                                  </tr>
+
 					</tbody>
                 </table>
-     <br><br>
-
-
-				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-					<table id="table3">
-				<colgroup><col width="100"/></colgroup>
-				<tr style="background-color: #eee">
-					<td id="message" class="redips-mark" title="You can not drop here">Table3</td>
-				<td><div id="d1" class="redips-drag t3 redips-clone" title="infinite cloning">e</div> </td>
-				<td class="redips-trash" title="Trash">ลบ</td>
-				</tr>
 
 
 
-			</table>
+
+
 
 			</div>
 
@@ -1295,10 +518,10 @@ div#redips-drag td {
 
 		</div>
 
-        <input type="hidden" class="form-control" id="name" name="name"   value=" {{$b}}">
-			<div><input type="button" value="Save2" class="button" onclick="save('json')" title="Send content to the server (it will only show accepted parameters)"/><span class="message_line">Save content of the first table (JSON format)</span></div>.
+              <input type="hidden" class="form-control" id="name" name="name"   value=" {{$b}}">
+              <input type="hidden" class="form-control" id="name" name="language_code"   value="tha">
 
-        </center>
+
 
         <script type="text/javascript">
 
@@ -1309,8 +532,8 @@ div#redips-drag td {
 "use strict";
 
 // define redips_init variable
-var redipsInit;
-
+var redipsInit,
+counter = 0;
 
 // redips initialization
 redipsInit = function () {
@@ -1369,8 +592,9 @@ redipsInit = function () {
 	rd.event.cloned = function () {
 		// display message
 		msg.innerHTML = 'Cloned';
-		// append 'd' to the element text (Clone -> Cloned)
-		//rd.obj.innerHTML += 'd';
+		counter++;
+		// append to the DIV element name
+		rd.obj.innerHTML += counter;
 	};
 	rd.event.changed = function () {
 		// get target and source position (method returns positions as array)
@@ -1434,13 +658,15 @@ function save(type) {
 		type: 'POST',
 		url: '/bookshelf',
 		data: {table_contents:table_content,
-               floor:$('input[name=name]').val()
+               floor:$('input[name=name]').val(),
+               language_code:$('input[name=language_code]').val()
 
 
         },
 		cache: false,
 		success: function (data) {
-		alert("Save successfully.. ");
+        alert("บันทึกเสร็จสมบูรณ์");
+        location.reload();
 		}
 	});
 		//window.open('/my/multiple-parameters-json.php?p=' + table_content, 'Mypop', 'width=350,height=260,scrollbars=yes');

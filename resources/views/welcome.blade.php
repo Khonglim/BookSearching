@@ -22,40 +22,49 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ asset('asset/dist/css/skins/_all-skins.min.css') }}">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 
-  <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-<style>
-.map
-            {
-                height:744px;
-                width:1341px;
-                 background-image:url('images/map.jpg');
-                border: solid 1px #355681;
-                margin-left: -200px;
 
-            }
+  <style>
+  #overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #ccc;
+    width: 100%;
+    height: 100%;
+    opacity: .75;
+    filter: alpha(opacity=75);
+    -moz-opacity: .75;
+    z-index: 999;
+    background: #fff url(images/loading.gif) 50% 50% no-repeat;
+}
+.main-contain{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
 
-</style>
+
+  </style>
+
 
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-purple  layout-top-nav">
+        <div id="overlay"></div>
 <div class="wrapper">
 
   <header class="main-header">
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../../index2.html" class="navbar-brand">BookSearching</a>
+        <a href="{{url('/')}}" class="navbar-brand">BookSearching</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -64,10 +73,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#"> <i class=" fa fa-folder-open"></i> รายการทั้งหมด <span class="sr-only">(current)</span></a></li>
-            <li><a href="#"> <i class=" fa  fa-cubes "></i>   สืบค้นตามประเภท</a></li>
-            <li><a href="#"> <i class=" fa  fa-users "></i>    สืบค้นตามผู้แต่ง</a></li>
-            <li><a href="#"> <i class=" fa  fa-newspaper-o "></i> สืบค้นตามปีพิมพ์</a></li>
+          <li class="active"><a href="{{url('/')}}"> <i class=" fa fa-folder-open"></i> รายการทั้งหมด <span class="sr-only">(current)</span></a></li>
+
+
           </ul>
 
         </div>
@@ -82,7 +90,7 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          ค้นหาหนังสือบนชั้นวาง
+          ค้นหาตู้หนังสือ
 
         </h1>
       <!--   <ol class="breadcrumb">
@@ -94,32 +102,134 @@
 
       <!-- Main content -->
       <section class="content">
-        <div class="box box-danger">
-            <div class="box-header">
-              <h3 class="box-title" >หอสมุดกลางยินดีตอนรับ</h3>
-            </div>
-            <div class="box-body">
-
-                <div  ALIGN="center">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="">
-                </div>
 
 
-                      <form action="{{url('/bookshow')}} "method="POST" id="form-data" enctype="multipart/form-data" files="true">
+
+
+
+                      <form action="/search" method="POST" role="search">
                         @csrf
-                        <div class="form-group">
-                                <label for="usr">   </label>
-                                <input type="text"  name="book" class="form-control" id="book" required  placeholder="">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="q"   placeholder="ค้นหาหนังสือ ex ภาษา c"> <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                    <br>
+                    <div class="row">
+                    @if(isset($pagination))
+
+                      @foreach ($pagination as $books)
+
+
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <div class="info-box" data-toggle="tooltip" title="{{ $books->best_title }}">
+                                <span class="info-box-icon bg-purple"><i class="fa fa fa-book " ></i></span>
+
+                                <div class="info-box-content">
+                                <span class="info-box-text"><b> ชื่อหนังสือ:  </b>{{ $books->best_title }} </span>
+                                <span class="info-box-text"><b> ผู้แต่ง:  </b>
+                                 @if($books->best_author == '')
+
+                                    ไม่ทราบผู้แต่ง
+                                 @else
+
+                                 {{$books->best_author}}
+
+                                 @endif
+
+
+
+
+                                </span>
+                                <span class="info-box-text"><b> ดูตำแหน่งตู้:</b>   <a href="/locationShow/{{  $books->callno}}" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i></a></span>
+                                <span class="info-box-text"><b> สถานะ:</b>
+                                @if($books->item_status_code == '-')
+
+                                   อยู่ในตู้
+                                 @else
+
+                                 ไม่ได้อยู่ในตู้
+
+                                 @endif
+
+
+
+                                </span>
+
+
+
+                                 </div>
                               </div>
-                              <div  ALIGN="center">   <button type="submit" class="btn btn-primary">ค้นหา</button>  </div>
-                      </form>
+                            </div>
 
-                </div>
-                </div>
 
-            </div>
-            <!-- /.box-body -->
-          </div>
+                     @endforeach
+                    </div>
+
+                  {{ $pagination->links() }}
+
+
+                  @endif
+
+                  <div class="container">
+                        @if(isset($details))
+                        <p> คำที่คุณค้นหา <b> {{ $query }} </b> ผลลัพธ์ :</p>
+                        @foreach ($details as $books)
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="info-box" data-toggle="tooltip" title="{{ $books->best_title }}">
+                            <span class="info-box-icon bg-purple"><i class="fa fa fa-book " ></i></span>
+
+                            <div class="info-box-content">
+                            <span class="info-box-text"><b> ชื่อหนังสือ:  </b>{{ $books->best_title }} </span>
+                             <span class="info-box-text"><b> ผู้แต่ง:  </b>
+                                    @if($books->best_author == '')
+
+                                       ไม่ทราบผู้แต่ง
+                                    @else
+
+                                    {{$books->best_author}}
+
+                                    @endif
+
+
+
+
+
+                            </span>
+                             <span class="info-box-text"><b> ดูตำแหน่งตู้:</b>   <a href="/locationShow/{{  $books->callno}}" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i></a></span>
+                             <span class="info-box-text"><b> สถานะ:</b>
+                                @if($books->item_status_code == '-')
+
+                                   อยู่ในตู้
+                                 @else
+
+                                 ไม่ได้อยู่ในตู้
+
+                                 @endif
+
+
+
+                                </span>
+                             </div>
+                          </div>
+                        </div>
+                 @endforeach
+                 <div class="col-md-6 col-sm-4 col-xs-12">
+                        @if($details){!! $details->render() !!}
+
+                 </div>
+
+
+                        @endif
+                        @elseif(isset($message))
+                        <p> คำที่คุณค้นหา <b> {{ $query }} </b> ผลลัพธ์ :</p>
+                        <p>{{ $message }}</p>
+                        @endif
+                    </div>
+
 
 
 
@@ -161,23 +271,19 @@
 
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js') }}"></script>
-<script  type="text/javascript">
-      $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-    $('#example').DataTable( {
-        "scrollY":        "500px",
-        "scrollCollapse": true,
-        "paging":         false,
+<script type="text/javascript">
+    $(function(){
+        $("#overlay").fadeOut();
+        $(".main-contain").removeClass("main-contain");
+    });
+    </script>
 
 
-    } );
-</script>
-
-
-
+<script>
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+        </script>
 
 </body>
 </html>

@@ -41,6 +41,10 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+
+
+
+$app->register(Ixudra\Curl\CurlServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Return The Application

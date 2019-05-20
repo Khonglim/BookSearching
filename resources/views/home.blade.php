@@ -23,24 +23,44 @@
       <span class="logo-lg"><b>Admin</b>BOOK</span>
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
 
-        <ul class="nav navbar-nav navbar-right">
-        <li>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-            <a  href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-             {{ __('ออกจากระบบ') }}
-         </a>
+                  <span class="hidden-xs">admin</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-@csrf
-</form>
 
-        </li>
+                  </li>
+                  <!-- Menu Body -->
 
-          </ul>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-right">
+                        <a  href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                         {{ __('ออกจากระบบ') }}
+                     </a>
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                        </form>
+                    </div>
+                  </li>
+                </ul>
+              </li>
 
+            </ul>
+          </div>
 
 
 
@@ -52,9 +72,9 @@
     <section class="sidebar">
             <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">การจัดการ</li>
-                    <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>การจัดการชั้น</span></a></li>
-                    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>หมวดหนังสือ</span></a></li>
-                    <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>สิทธิ์การเข้าถึง</span></a></li>
+                    <li><a href="{{url('/home')}}"><i class="fa fa-circle-o text-red"></i> <span>การจัดการชั้น</span></a></li>
+                    <li><a href="{{url('/category')}}"><i class="fa fa-circle-o text-yellow"></i> <span>หมวดหนังสือ</span></a></li>
+
             </ul>
     </section>
     <!-- /.sidebar -->
@@ -133,7 +153,7 @@
                                                 <div class="modal-body">
                                                         {{Form::open(['route'=>['shelfchange.update',$codewolds->id],'method'=>'PUT','files' => true])}}
                                                         @csrf
-                                                        @csrf
+
                                                         <div class="form-group">
                                                           <label for="floor">ชั้น</label>
                                                           <input type="number" class="form-control" id="floor" name="floor" placeholder="1" required>
@@ -158,7 +178,7 @@
                                                   <h4 class="modal-title">เพิ่มชั้น</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                        {{ Form::open(['route' => ['shelfchange.destroy',$codewolds->id, 'method' => "DELETE"] ]) }}
+                                                        {{ Form::open(['route' => ['shelfchange.destroy',$codewolds->floor, 'method' => "DELETE"] ]) }}
                                                         <input type="hidden" name="_method" value="delete" />
                                                       <p>คุณต้องการลบร้าน {{$codewolds->id }}ใช่หรือไม่!!!!</p>
                                                       </div>
@@ -171,6 +191,8 @@
 
                                             </div>
                                           </div>
+
+                                          <a href="/locationShow/'.$category->shelf.'" class="btn btn-primary btn-xs"><i class="fa fa-bomb">ลบตู้หนังสือ</i></a>
 
                         </td>
                         </tr>
@@ -216,12 +238,9 @@
 <script src="{{ asset('asset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js') }}"></script>
-<script>
-    $(document).ready( function () {
-        $('#table1').DataTable();
-    } );
 
-    </script>
+
+
 
 </body>
 </html>
