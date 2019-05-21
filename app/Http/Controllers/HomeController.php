@@ -13,7 +13,8 @@ class HomeController extends Controller
     public function index()
     {
 
-        $codewold = DB::table('floor')->get();
+
+
         $data = array('codewold'=> $codewold);
         return view('home' ,$data);
 
@@ -31,5 +32,9 @@ class HomeController extends Controller
     }
 
 
-  
+
+
+
+
+
 }

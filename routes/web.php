@@ -131,6 +131,8 @@ return view ( 'welcome' )->withMessage ( 'ไม่พบหนังสือ�
 
 Auth::routes();
 Route::resource('shelfchange', 'ShelfChangeController');
+Route::POST('shelfchange/de','ShelfChangeController@destroyfloor');
+
 
 Route::resource('category', 'CategoryController');
 Route::get('update/{id}','CategoryController@update');

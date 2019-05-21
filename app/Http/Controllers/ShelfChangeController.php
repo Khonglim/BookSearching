@@ -15,11 +15,13 @@ class ShelfChangeController extends Controller
      */
     public function index()
     {
-
-
         $code = DB::table('floor')->get();
-        $bookshelf = DB::table('bookshelf')->get();
-        $data = array('code'=> $code,'bookshelf' =>  $bookshelf);
+     $count = DB::table('floor')->leftJoin('bookshelf', 'floor.floor_id', '=', 'bookshelf.floor')->get();
+
+
+
+
+        $data = array('code'=> $code);
         return view('home' ,$data);
     }
 
@@ -84,7 +86,7 @@ class ShelfChangeController extends Controller
     {
         DB::table('floor')
         ->where('id', $id)
-        ->update(['floor' => $request->floor]);
+        ->update(['floor_id' => $request->floor]);
         Session::flash('flash_message','แก้ไขข้อมูลจังหวัดสำเร็จ!! ');
         return redirect('home');
     }
@@ -97,19 +99,41 @@ class ShelfChangeController extends Controller
      */
     public function destroy($id)
     {
-        $floor = DB::table('floor') ->where('floor', '>', $id)->get();
+       // $floor = DB::table('floor') ->where('floor', '>', $id)->get();
 
-         DB::table('floor')->where('floor', '=',$id)->delete();
-         foreach ($floor as $p){
-            DB::table('floor')
-            ->where('floor', '=',$p->floor)
-            ->update(['floor' =>$p->floor-1]);
+         DB::table('floor')->where('floor_id', '=',$id)->delete();
+        // foreach ($floor as $p){
+        //    DB::table('floor')
+        //    ->where('floor', '=',$p->floor_id)
+        //    ->update(['floor' =>$p->floor-1]);
 
-        }
+       // }
 
 
-       //  Session::flash('flash_message','ลบข้อมูลจังหวัดสำเร็จ!! ');
+         Session::flash('flash_message','ลบข้อมูลชั้นสำเร็จ!! ');
 
          return redirect('home');
     }
+
+
+
+    public function destroyfloor(Request $request)
+    {
+        $bookshelf = DB::table('bookshelf') ->where('id_shelf', '>', $request->shelf)->where('floor', '=', $request->floor) ->get();
+        DB::table('bookshelf')->where('id_shelf', '=',$request->shelf)->where('floor', '=', $request->floor)->delete();
+        foreach ($bookshelf as $p){
+           DB::table('bookshelf') ->where('id_shelf', '=',$p->id_shelf)
+           ->where('floor', '=', $request->floor)
+           ->update(['id_shelf' =>$p->id_shelf-1]);
+
+       }
+
+
+         Session::flash('flash_message','ลบข้อมูลตู้สำเร็จ!! ');
+
+         return redirect('home');
+    }
+
+
+
 }

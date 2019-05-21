@@ -130,6 +130,7 @@
                 <tr>
                     <th>#</th>
                     <th>ชั้น</th>
+                    <th>จำนวนตู้</th>
                     <th>เพิ่มเติม</th>
                 </tr>
             </thead>
@@ -138,10 +139,13 @@
                         <tr>
                             <td>#</td>
                             <td>
-                                {{$codewolds->floor}}
+                                {{$codewolds->floor_id}}
                             </td>
                             <td>
-                                <a href="{{url('editBook/'.$codewolds->floor)}}"  class="btn btn-warning btn-xs"><i  class="fa fa-map"  width="15px"></i> แผนที่</a>
+
+                            </td>
+                            <td>
+                                <a href="{{url('editBook/'.$codewolds->floor_id)}}"  class="btn btn-warning btn-xs"><i  class="fa fa-map"  width="15px"></i> แผนที่</a>
                                     <a href="#" data-toggle="modal" data-target="#edit{{$codewolds->id}}" class="btn btn-info btn-xs"><i  class="fa fa-pencil"  width="15px"></i> แก้ไข</a>
                                     <div id="edit{{$codewolds->id}}" class="modal fade" role="dialog">
                                             <div class="modal-dialog">
@@ -178,7 +182,7 @@
                                                   <h4 class="modal-title">เพิ่มชั้น</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                        {{ Form::open(['route' => ['shelfchange.destroy',$codewolds->floor, 'method' => "DELETE"] ]) }}
+                                                        {{ Form::open(['route' => ['shelfchange.destroy',$codewolds->floor_id, 'method' => "DELETE"] ]) }}
                                                         <input type="hidden" name="_method" value="delete" />
                                                       <p>คุณต้องการลบร้าน {{$codewolds->id }}ใช่หรือไม่!!!!</p>
                                                       </div>
@@ -192,7 +196,34 @@
                                             </div>
                                           </div>
 
-                                          <a href="/locationShow/'.$category->shelf.'" class="btn btn-primary btn-xs"><i class="fa fa-bomb">ลบตู้หนังสือ</i></a>
+                                          <a href="#" class="btn btn-primary btn-xs"  data-toggle="modal" data-target="#de{{$codewolds->id}}"><i class="fa fa-bomb">ลบตู้หนังสือ</i></a>
+                                          <div id="de{{$codewolds->id}}" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                  <h4 class="modal-title">ลบตู้หนังสือชั้น {{$codewolds->floor_id}}</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form-inline" action="{{url('/shelfchange/de')}}"  method="POST" id="form-data" enctype="multipart/form-data" files="true">
+                                                        @csrf
+                                                        <div class="form-group">
+                                                          <label for="floor">เลขตู้</label>
+                                                          <input type="number" class="form-control" id="shelf" name="shelf" placeholder="1" required>
+                                                        <input type="hidden" name="floor"   value="{{$codewolds->floor_id}}">
+                                                        </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="submit" class="btn btn-success">บันทึก</button>
+                                                </form>
+                                                  <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+
+                                                </div>
+                                              </div>
+
+                                            </div>
+                                          </div>
+
 
                         </td>
                         </tr>
