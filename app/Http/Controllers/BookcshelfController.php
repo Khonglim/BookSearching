@@ -20,7 +20,7 @@ class BookcshelfController extends Controller
     {
         $p = stripslashes($request->table_contents);
         $f = $request->floor;
-        $d =   $request->language_code;
+
 		// decode JSON object (it shouldn't be decoded as associative array)
 		$arr = json_decode($p);
         // open loop through each array element
@@ -37,7 +37,7 @@ class BookcshelfController extends Controller
             $text = $p[4];
 
 			// instead of print, you can store accepted parameteres to the database
-            DB::insert('insert into bookshelf (row,id_shelf,cell,floor,	language_code) values ("'.$row.'","'.$text.'","'.$cell.'","'.$f.'","'.$d.'")');
+            DB::insert('insert into bookshelf (row,id_shelf,cell,floor) values ("'.$row.'","'.$text.'","'.$cell.'","'.$f.'")');
             //print "Id=$id Row=$row Cell=$cell Class=$class Text=$text";
 
 		}
