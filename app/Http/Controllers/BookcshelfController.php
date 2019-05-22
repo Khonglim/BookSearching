@@ -54,19 +54,14 @@ class BookcshelfController extends Controller
                       'cell'    =>      $cell,
                       'locationbook' => $locationbook
         );
-        return view('locationShow', $data);
-           }else{
-
-
-            return "ขออภัยไม่มีข้อมูลในระบบ";
+                 return view('locationShow', $data);
            }
 
-
-
-
-
-
-        }
+           else
+           {
+                return "ขออภัยไม่มีข้อมูลในระบบ";
+           }
+}
 
         public function delete($id)
         {
