@@ -124,13 +124,7 @@ p.indent{
                   <div class="scroll">
 		<div  class="map" id="MapBook" >
 			<div id="redips-drag">
-
-
             <br><br><br><br><br><br><br><br>
-
-
-
-
 
 				<table id="table1">
 

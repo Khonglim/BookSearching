@@ -10,7 +10,16 @@ class BookcshelfController extends Controller
     public function index($id){
     $b = $id;
     $bookshelf = DB::table('bookshelf')->where('floor', '=',$id)->get();
-    $data = array('bookshelf' => $bookshelf ,'b' => $b );
+    
+
+    $data = array('bookshelf' => $bookshelf ,
+                          'b' => $b,
+                          'count' => $count
+
+
+                        );
+
+
     return view('bookshelf', $data);
 
     }

@@ -142,7 +142,7 @@
                                 {{$codewolds->floor_id}}
                             </td>
                             <td>
-
+                                {{$codewolds->shelf_all}}
                             </td>
                             <td>
                                 <a href="{{url('editBook/'.$codewolds->floor_id)}}"  class="btn btn-warning btn-xs"><i  class="fa fa-map"  width="15px"></i> แผนที่</a>

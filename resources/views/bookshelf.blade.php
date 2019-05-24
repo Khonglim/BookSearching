@@ -533,7 +533,7 @@ p.indent{
 
 // define redips_init variable
 var redipsInit,
-counter = 0;
+counter = {{$count}};
 
 // redips initialization
 redipsInit = function () {
