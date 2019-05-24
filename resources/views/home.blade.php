@@ -28,16 +28,19 @@
           </a>
 
           <div class="navbar-custom-menu">
+
+
             <ul class="nav navbar-nav">
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
+                        <img src="{{asset('/images/icon.jpg')}}" class="img-circle" alt="User Image"   width="20px"  height="20px">
                   <span class="hidden-xs">admin</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="{{asset('/images/icon.jpg')}}" class="img-circle" alt="User Image">
 
 
                   </li>

@@ -10,7 +10,7 @@ class PostController extends Controller
     {
         $category= Category::all();
         return datatables($category)->addColumn('action', function ($category) {
-              return '  <a href="#" data-toggle="modal" data-target="#edit'.$category->id.'" class="btn btn-info btn-xs"><i  class="fa fa-pencil"  width="15px"></i> แก้ไข</a>
+              return '  <a href="#" data-toggle="modal" data-target="#edit'.$category->id.'" class="btn btn-warning btn-xs"><i  class="fa fa-pencil"  width="15px"></i> แก้ไข</a>
               <div id="edit'.$category->id.'" class="modal fade" role="dialog">
                       <div class="modal-dialog modal-lg" >
                         <div class="modal-content">

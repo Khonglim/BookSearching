@@ -69,13 +69,13 @@
                 <ul class="nav navbar-nav">
                   <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
+                            <img src="{{asset('/images/icon.jpg')}}" class="img-circle" alt="User Image"   width="20px"  height="20px">
                       <span class="hidden-xs">admin</span>
                     </a>
                     <ul class="dropdown-menu">
                       <!-- User image -->
                       <li class="user-header">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="{{asset('/images/icon.jpg')}}" class="img-circle" alt="User Image">
 
 
                       </li>
@@ -134,7 +134,7 @@
    <div class="box box-info">
     <div class="box-header with-border">
     <a href="#" class="btn btn-success"  data-toggle="modal" data-target="#myModal">เพิ่มหมวด</a>
-    <a href="#" class="btn btn-info"  data-toggle="modal" data-target="#myModal">ย้ายหมวดไปชั้นอื่น</a>
+    <a href="#" class="btn btn-info"  data-toggle="modal" data-target="#myModal2">ย้ายหมวดไปชั้นอื่น</a>
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
 
