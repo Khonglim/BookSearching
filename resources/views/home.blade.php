@@ -130,7 +130,7 @@
                 <tr>
                     <th>#</th>
                     <th>ชั้น</th>
-                    <th>จำนวนตู้</th>
+                    <th>จำนวนตู้ทั้งหมด</th>
                     <th>เพิ่มเติม</th>
                 </tr>
             </thead>
@@ -142,7 +142,7 @@
                                 {{$codewolds->floor_id}}
                             </td>
                             <td>
-                                {{$codewolds->shelf_all}}
+                                {{$codewolds->shelf_all}} ตู้
                             </td>
                             <td>
                                 <a href="{{url('editBook/'.$codewolds->floor_id)}}"  class="btn btn-warning btn-xs"><i  class="fa fa-map"  width="15px"></i> แผนที่</a>

@@ -10,7 +10,7 @@ class BookcshelfController extends Controller
     public function index($id){
     $b = $id;
     $bookshelf = DB::table('bookshelf')->where('floor', '=',$id)->get();
-    
+    $count= DB::table('bookshelf')->where('floor', '=',$id)->count();
 
     $data = array('bookshelf' => $bookshelf ,
                           'b' => $b,
@@ -49,7 +49,11 @@ class BookcshelfController extends Controller
             DB::insert('insert into bookshelf (row,id_shelf,cell,floor) values ("'.$row.'","'.$text.'","'.$cell.'","'.$f.'")');
             //print "Id=$id Row=$row Cell=$cell Class=$class Text=$text";
 
-		}
+        }
+
+        $count= DB::table('bookshelf')->where('floor', '=',$f )->count();
+        DB::table('floor')->where('floor_id', $f)->update(['shelf_all' => $count]);
+
     }
         public function locationshow($id,$namebook){
             $cell=$id;
