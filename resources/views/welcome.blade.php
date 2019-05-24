@@ -144,7 +144,7 @@
 
 
                                 </span>
-                                <span class="info-box-text"><b> ดูตำแหน่งตู้:</b>   <a href="/locationShow/{{  $books->callno}}" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i></a></span>
+                                <span class="info-box-text"><b> ดูตำแหน่งตู้:</b>   <a href="/locationShow/{{$books->callno}}/{{$books->best_title}}" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i></a></span>
                                 <span class="info-box-text"><b> สถานะ:</b>
                                 @if($books->item_status_code == '-')
 
@@ -199,7 +199,7 @@
 
 
                             </span>
-                             <span class="info-box-text"><b> ดูตำแหน่งตู้:</b>   <a href="/locationShow/{{  $books->callno}}" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i></a></span>
+                        <span class="info-box-text"><b> ดูตำแหน่งตู้:</b>   <a href="/locationShow/{{$books->callno}}/{{$books->best_title}}" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i></a></span>
                              <span class="info-box-text"><b> สถานะ:</b>
                                 @if($books->item_status_code == '-')
 

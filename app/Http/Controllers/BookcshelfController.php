@@ -42,17 +42,22 @@ class BookcshelfController extends Controller
 
 		}
     }
-        public function locationshow($id){
+        public function locationshow($id,$namebook){
             $cell=$id;
+            $namebooks =$namebook;
 
             $floor  =  DB::table('location_book')->where('call_b',$id)->get();
 
            if(count($floor) >0 ){
             $bookshelf = DB::table('bookshelf')->where('floor','=',$floor[0]->floor_id)->get();
+            $floor = $floor[0]->floor_id;
             $locationbook = DB::table('location_book')->get();
             $data = array('bookshelf' =>   $bookshelf,
                       'cell'    =>      $cell,
-                      'locationbook' => $locationbook
+                      'locationbook' => $locationbook,
+                               'floor'      =>$floor,
+                                  'namebooks'     => $namebooks
+
         );
                  return view('locationShow', $data);
            }
