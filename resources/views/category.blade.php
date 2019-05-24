@@ -9,11 +9,13 @@
 <meta name="expires" content="never" />
   <link rel="stylesheet" href="{{ asset('asset/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('asset/bower_components/font-awesome/css/font-awesome.min.css') }}">
+  <link href="{{ asset('asset/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('asset/bower_components/Ionicons/css/ionicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('asset/dist/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{ asset('asset/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('asset/dist/css/skins/_all-skins.min.css') }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 
   <style type="text/css">
     html,body {
@@ -134,40 +136,99 @@
    <div class="box box-info">
     <div class="box-header with-border">
     <a href="#" class="btn btn-success"  data-toggle="modal" data-target="#myModal">เพิ่มหมวด</a>
-    <a href="#" class="btn btn-info"  data-toggle="modal" data-target="#myModal2">ย้ายหมวดไปชั้นอื่น</a>
     <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-lg">
 
-          <div class="modal-content">
+              <div class="modal-content">
 
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">เพิ่มหมวด</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-inline" action="{{url('/category')}}"  method="POST" id="form-data" enctype="multipart/form-data" files="true">
-                    @csrf
-                    <div class="form-group">
-                      <label for="floor">ชั้น:</label>
-                      <input type="number" class="form-control" id="floor" name="floor_id" placeholder="ชั้น" required>
-                    </div>
-                    <div class="form-group">
-                            <label for="floor">ตู้:</label>
-                            <input type="number" class="form-control" id="floor" name="shelf" placeholder="ตู้" required>
-                          </div>
-                          <div class="form-group">
-                                <label for="floor">หมวด:</label>
-                                <input type="text" class="form-control" id="floor" name="call_b" placeholder="หมวด" required>
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">เพิ่มหมวด</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" action="{{url('/category')}}"  method="POST" id="form-data" enctype="multipart/form-data" files="true">
+                        @csrf
+                        <div class="form-group">
+                          <label for="floor">ชั้น:</label>
+                          <input type="number" class="form-control" id="floor" name="floor_id" placeholder="ชั้น" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="floor">ตู้:</label>
+                                <input type="number" class="form-control" id="floor" name="shelf" placeholder="ตู้" required>
                               </div>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-success">บันทึก</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                              <div class="form-group">
+                                    <label for="floor">หมวด:</label>
+                                    <input type="text" class="form-control" id="floor" name="call_b" placeholder="หมวด" required>
+                                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success">บันทึก</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                </div>
+              </div>
+            </form>
             </div>
           </div>
-        </form>
-        </div>
-      </div>
+
+    <a href="#" class="btn btn-info"  data-toggle="modal" data-target="#myModal2">ย้ายหมวดไปชั้นอื่น</a>
+    <div id="myModal2" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+              <div class="modal-content">
+
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">ย้ายหมวดไปชั้นอื่น</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" action="{{url('/category')}}" name="frmMain" method="POST" id="form-data" enctype="multipart/form-data" files="true">
+                        @csrf
+                        <select class="js-example-basic-single form-control" name="state"  OnChange="resutName(this.value);" >
+                          <option value="" >--เลือกหมวด--</option>
+                          @foreach ($category as $item)
+                          <option value="{{$item->floor_id}}|{{$item->shelf}}|{{$item->call_b}}"> {{$item->call_b}}</option>
+
+                          @endforeach
+
+                        </select>
+                        <hr>
+                        <div class="form-group">
+                          <label for="floor">ชั้นเดิม:</label>
+                          <input type="number" class="form-control" id="floor_id" name="floor_id" placeholder="ชั้น" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="floor">ตู้เดิม:</label>
+                                <input type="number" class="form-control" id="shelf" name="shelf" placeholder="ตู้" required>
+                              </div>
+                              <div class="form-group">
+                                    <label for="floor">หมวด:</label>
+                                    <input type="text" class="form-control" id="call_b" name="call_b" placeholder="หมวด" required>
+                                </div>
+                                   <br><br>
+                                  <div class="form-group">
+                                        <label for="floor">ชั้นใหม่:</label>
+                                        <input type="number" class="form-control" id="floor" name="floor_id2" placeholder="ชั้น" required>
+                                      </div>
+                                      <div class="form-group">
+                                              <label for="floor">ตู้ใหม่:</label>
+                                              <input type="number" class="form-control" id="floor" name="shelf2" placeholder="ตู้" required>
+                                            </div>
+<hr>
+
+
+                                  <div class="checkbox">
+                                        <label><input type="checkbox" value="">กรณีย้ายทั้งตู้</label>
+                                      </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success">บันทึก</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                </div>
+              </div>
+            </form>
+            </div>
+          </div>
+
     </div>
 
 
@@ -216,6 +277,7 @@
 <script src="{{ asset('asset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
     $('#category').DataTable( {
 
@@ -241,9 +303,23 @@
         $("#overlay").fadeOut();
         $(".main-contain").removeClass("main-contain");
     });
+
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
     </script>
 
 
+<script language="JavaScript">
+      function resutName(strCusName)
+            {
+                        frmMain.floor_id.value = strCusName.split("|")[0];
+                        frmMain.shelf.value = strCusName.split("|")[1];
+                        frmMain.call_b.value = strCusName.split("|")[2];
+
+
+            }
+</script>
 
 
 </body>
