@@ -201,7 +201,7 @@ Route::get('editBook/{id}', 'BookcshelfController@index');
 Route::post('allposts', 'PostController@postdata' )->name('dataProcessing');
 
 
-Route::get('locationShow/{id}/{namebook}','BookcshelfController@locationshow');
+Route::get('locationShow/{id}/{namebook}/{language}','BookcshelfController@locationshow');
 
 Route::post('bookap', 'HomeController@postdata' )->name('bookapi');
 
