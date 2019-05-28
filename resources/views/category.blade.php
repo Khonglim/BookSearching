@@ -160,6 +160,17 @@
                                     <label for="floor">หมวด:</label>
                                     <input type="text" class="form-control" id="floor" name="call_b" placeholder="หมวด" required>
                                   </div>
+                                  <br><br>
+                                  <div class="form-group">
+                                    <label for="floor">ภาษา:</label>
+                                    <select class=" form-control" name="language" >
+                                        <option value="" >--เลือกภาษา--</option>
+                                        <option value="tha" >ภาษาไทย</option>
+                                        <option value="eng" >ภาษาอังกฤษ</option>
+
+
+                                      </select>
+                                  </div>
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-success">บันทึก</button>
@@ -213,9 +224,7 @@
                                               <label for="floor">ตู้ใหม่:</label>
                                               <input type="number" class="form-control" id="floor" name="shelf2" placeholder="ตู้" required>
                                             </div>
-<hr>
-
-
+                                          <hr>
                                   <div class="checkbox">
                                         <label><input type="checkbox" value="">กรณีย้ายทั้งตู้</label>
                                       </div>

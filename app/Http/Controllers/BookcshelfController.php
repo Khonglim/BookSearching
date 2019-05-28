@@ -55,11 +55,12 @@ class BookcshelfController extends Controller
         DB::table('floor')->where('floor_id', $f)->update(['shelf_all' => $count]);
 
     }
-        public function locationshow($id,$namebook){
+        public function locationshow($id,$namebook,$language){
             $cell=$id;
-            $namebooks =$namebook;
+            $namebooks = $namebook;
+            $languages =  $language;
 
-            $floor  =  DB::table('location_book')->where('call_b',$id)->get();
+            $floor  =  DB::table('location_book')->where('call_b',$id)->where('language',$languages)->get();
 
            if(count($floor) >0 ){
             $bookshelf = DB::table('bookshelf')->where('floor','=',$floor[0]->floor_id)->get();

@@ -32,8 +32,11 @@ class PostController extends Controller
                 <label for="exampleInputEmail1">หมวด:</label>
                 <input type="text" class="form-control" id="call_b"  name="call_b"   placeholder="หมวด" value="'.$category->call_b.'" >
               </div>
-
-
+              <br><br>
+              <div class="form-group">
+                <label for="floor">ภาษา:</label>
+                <input type="text" class="form-control" id="call_b"  name="language"   placeholder="ภาษา" value="'.$category->language.'" >
+</div>
 
 
                           </div>
