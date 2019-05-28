@@ -73,7 +73,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
-          <li class="active"><a href="{{url('/')}}"> <i class=" fa fa-folder-open"></i> รายการหนังสือภาษาไทย<span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="{{url('/')}}"> <i class=" fa fa-folder-open"></i>รายการหนังสือภาษาไทย<span class="sr-only">(current)</span></a></li>
           <li ><a href="{{url('/eng')}}"> <i class=" fa  fa-send-o "></i> รายการหนังสือภาษาอังกฤษ</a></li>
 
           </ul>
@@ -102,12 +102,7 @@
 
       <!-- Main content -->
       <section class="content">
-
-
-
-
-
-                      <form action="/search" method="POST" role="search">
+                      <form action="/searcheng" method="POST" role="search">
                         @csrf
                         <div class="input-group">
                             <input type="text" class="form-control" name="q"   placeholder="ค้นหาหนังสือ ex ภาษา c"> <span class="input-group-btn">
@@ -287,5 +282,3 @@
 
 </body>
 </html>
-
-

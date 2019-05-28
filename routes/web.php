@@ -16,17 +16,31 @@ use Ixudra\Curl\Facades\Curl;
 |
 */
 
+Route::get('/eng', function () {
+
+    $pagination = Bookapi::where('language_code', '=', 'eng')->paginate(16);
+    $data  = array('pagination' =>$pagination , );
+    return view('book_eng',$data);
+
+
+});
+
+
+
+
+
 Route::get('/', function () {
- //   $ch = curl_init();
-  //  $url = "http://202.28.17.35/api4lib/api/index.php/GetListOfItmesFromCallNoRange/%7CaA/%7CaZ/bcm/tha";
- //  curl_setopt($ch, CURLOPT_URL, $url);
- //   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  // $output = json_decode(curl_exec($ch));
-    //curl_close($ch);
+    $ch = curl_init();
+   // $url = "http://202.28.17.35/api4lib/api/index.php/GetListOfItmesFromCallNoRange/%7CaA/%7CaZ/bcm/tha";
+  // $url = "http://202.28.17.35/api4lib/api/index.php/GetListOfItmesFromCallNoRange/%7CaA/%7CaP/bcm/eng";
+   //curl_setopt($ch, CURLOPT_URL, $url);
+   //  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    //$output = json_decode(curl_exec($ch));
+   // curl_close($ch);
 
 
   // $book = $output->ListOfItemsFromCallNoRange;
-  // Bookapi::truncate();
+   //Bookapi::truncate();
    //foreach ($book as $r) {
 
     //   $bookapi = new Bookapi();
@@ -68,41 +82,47 @@ Route::get('/', function () {
 
 //$book = $response->ListOfItemsFromCallNoRange;
 //Bookapi::truncate();
-//foreach ($book as $r) {
-   //     $bookapi = new Bookapi();
-   //     $bookapi->barcode = $r->barcode;
-    //    $bookapi->location_code = $r->location_code ;
-    //    $bookapi->bib_record_id = $r->bib_record_id ;
-    //    $bookapi->item_record_id = $r->item_record_id ;
-    //    $bookapi->best_title = $r->best_title ;
-     //   $bookapi->best_author = $r->best_author ;
-     //   $bookapi->item_status_code = $r->item_status_code ;
-    //    $bookapi->use3_count = $r->use3_count ;
-    //    $bookapi->copy_use_count = $r->copy_use_count ;
-      //  $bookapi->due_gmt = $r->due_gmt ;
-      //  $bookapi->language_code = $r->language_code ;
+  //foreach ($book as $r) {
+     //   $bookapi = new Bookapi();
+    //    $bookapi->barcode = $r->barcode;
+   //     $bookapi->location_code = $r->location_code ;
+  //      $bookapi->bib_record_id = $r->bib_record_id ;
+   //     $bookapi->item_record_id = $r->item_record_id ;
+  //      $bookapi->best_title = $r->best_title ;
+  //      $bookapi->best_author = $r->best_author ;
+   //     $bookapi->item_status_code = $r->item_status_code ;
+  //      $bookapi->use3_count = $r->use3_count ;
+  //      $bookapi->copy_use_count = $r->copy_use_count ;
+  //      $bookapi->due_gmt = $r->due_gmt ;
+   //     $bookapi->language_code = $r->language_code ;
 
-     //   $e=explode("|",$r->callno);
+    //    $e=explode("|",$r->callno);
     //    $cut1=substr($e[1],1);
-
-     //   $bookapi->callno =  $cut1;
-     //   $bookapi->group_code = $r->group_code ;
-      //  $bookapi->class = $r->class ;
-      //  $bookapi->class_x = $r->class_x ;
-    //    $bookapi->save();
+//
+   //     $bookapi->callno =  $cut1;
+   //     $bookapi->group_code = $r->group_code ;
+   //     $bookapi->class = $r->class ;
+    //    $bookapi->class_x = $r->class_x ;
+    //   $bookapi->save();
 //}
 
 
-$pagination = Bookapi::paginate(16);
+$pagination = Bookapi::where('language_code', '=', 'tha')->paginate(16);
 $data  = array('pagination' =>$pagination , );
 
 
    return view('welcome',$data);
 });
+
+
+
 Route::any ( '/search', function () {
     $q = Input::get ( 'q' );
     if($q != ""){
-    $pagination = Bookapi::where ( 'best_title', 'LIKE', '%' . $q . '%' )->orWhere ( 'best_author', 'LIKE', '%' . $q . '%' )->paginate (10)->setPath ( '' );
+    $pagination = Bookapi::where ( 'best_title', 'LIKE', '%' . $q . '%' )->orWhere ( 'best_author', 'LIKE', '%' . $q . '%' )->where('language_code', '=', 'tha')->paginate (16)->setPath ( '' )
+
+
+    ;
   $pagination->appends( array (
         'q' => Input::get ( 'q' )
       ) );
@@ -120,7 +140,28 @@ return view ( 'welcome' )->withMessage ( 'ไม่พบหนังสือ�
    });
 
 
+   Route::any ( '/searcheng', function () {
+    $q = Input::get ( 'q' );
+    if($q != ""){
+    $pagination = Bookapi::where ( 'best_title', 'LIKE', '%' . $q . '%' )->orWhere ( 'best_author', 'LIKE', '%' . $q . '%' )->where('language_code', '=', 'eng')->paginate (16)->setPath ( '' )
 
+
+    ;
+  $pagination->appends( array (
+        'q' => Input::get ( 'q' )
+      ) );
+
+
+    if (count ( $pagination ) > 0){
+    return view ( 'welcome', )->withDetails( $pagination )->withQuery ( $q );
+   }
+
+}
+
+
+
+return view ( 'welcome' )->withMessage ( 'ไม่พบหนังสือที่คุณค้นหา...' )->withQuery ( $q );
+   });
 
 
 
