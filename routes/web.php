@@ -178,7 +178,7 @@ Route::POST('shelfchange/de','ShelfChangeController@destroyfloor');
 Route::resource('category', 'CategoryController');
 Route::get('update/{id}','CategoryController@update');
 Route::get('destroy/{id}','CategoryController@destroy');
-
+Route::get('categorych','CategoryController@destroych');
 
 Route::get('home','ShelfChangeController@index')->name('home');
 Route::resources([

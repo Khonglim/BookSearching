@@ -45,6 +45,7 @@ class CategoryController extends Controller
         $category->floor_id =  $request->floor_id;
         $category->shelf =  $request->shelf;
         $category->call_b =  $request->call_b;
+        $category->language =  $request->language;
         $category->save();
 
         Session::flash('flash_message','เพิ่มข้อมูลสำเร็จ!! ');
@@ -85,7 +86,7 @@ class CategoryController extends Controller
     {
         DB::table('location_book')
         ->where('id', $id)
-        ->update(['floor_id' => $request->floor_id, 'shelf' => $request->shelf,'call_b' => $request->call_b]);
+        ->update(['floor_id' => $request->floor_id, 'shelf' => $request->shelf,'call_b' => $request->call_b,'language'=>$request->language]);
         Session::flash('flash_message','แก้ไขข้อมูลสำเร็จ!! ');
         return redirect('category');
     }
@@ -102,4 +103,26 @@ class CategoryController extends Controller
       Session::flash('flash_message','ลบข้อมูลสำเร็จ!! ');
       return redirect('category');
     }
+
+
+
+
+
+
+
+
+
+    public function destroych(Request $request)
+    {
+       
+    }
+
+
+
+
+
+
+
+
+
 }

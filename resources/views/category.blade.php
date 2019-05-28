@@ -192,9 +192,9 @@
                   <h4 class="modal-title">ย้ายหมวดไปชั้นอื่น</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-inline" action="{{url('/category')}}" name="frmMain" method="POST" id="form-data" enctype="multipart/form-data" files="true">
+                    <form class="form-inline" action="{{url('/categorych')}}" name="frmMain" method="GET" id="form-data" enctype="multipart/form-data" files="true">
                         @csrf
-                        <select class="js-example-basic-single form-control" name="state"  OnChange="resutName(this.value);" >
+                        <select class="js-example-basic-single form-control" name="state"  OnChange="resutName(this.value);" id="cattalog" >
                           <option value="" >--เลือกหมวด--</option>
                           @foreach ($category as $item)
                           <option value="{{$item->floor_id}}|{{$item->shelf}}|{{$item->call_b}}"> {{$item->call_b}}</option>
@@ -218,16 +218,25 @@
                                    <br><br>
                                   <div class="form-group">
                                         <label for="floor">ชั้นใหม่:</label>
-                                        <input type="number" class="form-control" id="floor" name="floor_id2" placeholder="ชั้น" required>
+                                        <input type="number" class="form-control" id="floor_id2" name="floor_id2" placeholder="ชั้น" required>
                                       </div>
                                       <div class="form-group">
                                               <label for="floor">ตู้ใหม่:</label>
-                                              <input type="number" class="form-control" id="floor" name="shelf2" placeholder="ตู้" required>
+                                              <input type="number" class="form-control" id="shelf2" name="shelf2" placeholder="ตู้" required>
                                             </div>
                                           <hr>
                                   <div class="checkbox">
-                                        <label><input type="checkbox" value="">กรณีย้ายทั้งตู้</label>
+                                        <label><input type="checkbox" value="1"   name="checkBox"  id="checkBox">กรณีย้ายทั้งตู้</label>
                                       </div>
+                                      <br> <br>
+                                      <div class="form-group">
+                                        <label for="floor">ชั้นใหม่:</label>
+                                        <input type="number" class="form-control" id="floor_id2" name="floor_id2" placeholder="ชั้น" required>
+                                      </div>
+                                      <div class="form-group">
+                                              <label for="floor">ตู้ใหม่:</label>
+                                              <input type="number" class="form-control" id="shelf2" name="shelf2" placeholder="ตู้" required>
+                                            </div>
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-success">บันทึก</button>
@@ -329,6 +338,66 @@
 
             }
 </script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#checkBox").click(function () {
+            if ($(this).is(":checked")) {
+                $("#shelf2").attr("disabled", "disabled");
+                $("#floor_id2").attr("disabled", "disabled");
+                $("#call_b").attr("disabled", "disabled");
+                $("#shelf").attr("disabled", "disabled");
+                $("#floor_id").attr("disabled", "disabled");
+                $("#cattalog").attr("disabled", "disabled");
+
+
+
+            } else {
+                $("#shelf2").removeAttr("disabled");
+                $("#shelf2").focus();
+
+                $("#floor_id2").removeAttr("disabled");
+                $("#floor_id2").focus();
+
+                $("#call_b").removeAttr("disabled");
+                $("#call_b").focus();
+
+                $("#shelf").removeAttr("disabled");
+                $("#shelf").focus();
+
+                $("#floor_id").removeAttr("disabled");
+                $("#floor_id").focus();
+
+                $("#cattalog").removeAttr("disabled");
+                $("#cattalog").focus();
+
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </body>
