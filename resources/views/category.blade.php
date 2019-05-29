@@ -231,11 +231,11 @@
                                       <br> <br>
                                       <div class="form-group">
                                         <label for="floor">ชั้นใหม่:</label>
-                                        <input type="number" class="form-control" id="floor_id2" name="floor_id2" placeholder="ชั้น" required>
+                                        <input type="number" class="form-control" id="floor_id3" name="floor_id3" placeholder="ชั้น" required  disabled>
                                       </div>
                                       <div class="form-group">
                                               <label for="floor">ตู้ใหม่:</label>
-                                              <input type="number" class="form-control" id="shelf2" name="shelf2" placeholder="ตู้" required>
+                                              <input type="number" class="form-control" id="shelf3" name="shelf3" placeholder="ตู้" required   disabled>
                                             </div>
                 </div>
                 <div class="modal-footer">
@@ -349,7 +349,11 @@
                 $("#shelf").attr("disabled", "disabled");
                 $("#floor_id").attr("disabled", "disabled");
                 $("#cattalog").attr("disabled", "disabled");
+                $("#shelf3").removeAttr("disabled");
+                $("#shelf3").focus();
 
+                $("#floor_id3").removeAttr("disabled");
+                $("#floor_id3").focus();
 
 
             } else {
@@ -370,6 +374,13 @@
 
                 $("#cattalog").removeAttr("disabled");
                 $("#cattalog").focus();
+
+                $("#floor_id3").attr("disabled", "disabled");
+
+                $("#shelf3").attr("disabled", "disabled");
+
+
+
 
             }
         });

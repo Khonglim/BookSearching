@@ -16,12 +16,16 @@ class ShelfChangeController extends Controller
     public function index()
     {
         $code = DB::table('floor')->get();
-     $count = DB::table('floor')->leftJoin('bookshelf', 'floor.floor_id', '=', 'bookshelf.floor')->get();
+        $count = DB::table('floor')->leftJoin('bookshelf', 'floor.floor_id', '=', 'bookshelf.floor')->get();
 
 
 
 
-        $data = array('code'=> $code);
+        $data = array('code'=> $code
+
+
+
+    );
         return view('home' ,$data);
     }
 
@@ -129,7 +133,10 @@ class ShelfChangeController extends Controller
        }
 
 
-         Session::flash('flash_message','ลบข้อมูลตู้สำเร็จ!! ');
+       $count= DB::table('bookshelf')->where('floor', '=',$request->floor)->count();
+       DB::table('floor')->where('floor_id', $request->floor)->update(['shelf_all' => $count]);
+
+       Session::flash('flash_message','ลบข้อมูลตู้สำเร็จ!! ');
 
          return redirect('home');
     }

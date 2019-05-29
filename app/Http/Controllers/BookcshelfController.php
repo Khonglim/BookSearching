@@ -95,7 +95,7 @@ class BookcshelfController extends Controller
             }
 
 
-            Session::flash('flash_message','ลบข้อมูลจังหวัดสำเร็จ!! ');
+            Session::flash('flash_message','ลบข้อมูลสำเร็จ!! ');
 
              return redirect('home');
         }
