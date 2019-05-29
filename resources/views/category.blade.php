@@ -230,13 +230,23 @@
                                       </div>
                                       <br> <br>
                                       <div class="form-group">
-                                        <label for="floor">ชั้นใหม่:</label>
+                                        <label for="floor">ชั้นเดิม:</label>
                                         <input type="number" class="form-control" id="floor_id3" name="floor_id3" placeholder="ชั้น" required  disabled>
                                       </div>
                                       <div class="form-group">
-                                              <label for="floor">ตู้ใหม่:</label>
+                                              <label for="floor">ตู้เดิม:</label>
                                               <input type="number" class="form-control" id="shelf3" name="shelf3" placeholder="ตู้" required   disabled>
-                                            </div>
+                                        </div>
+
+                                      <br><br>
+                                      <div class="form-group">
+                                        <label for="floor">ชั้นใหม่:</label>
+                                        <input type="number" class="form-control" id="floor_id4" name="floor_id4" placeholder="ชั้น" required  disabled>
+                                      </div>
+                                      <div class="form-group">
+                                              <label for="floor">ตู้ใหม่:</label>
+                                              <input type="number" class="form-control" id="shelf4" name="shelf4" placeholder="ตู้" required   disabled>
+                                        </div>
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-success">บันทึก</button>
@@ -355,7 +365,11 @@
                 $("#floor_id3").removeAttr("disabled");
                 $("#floor_id3").focus();
 
+                $("#shelf4").removeAttr("disabled");
+                $("#shelf4").focus();
 
+                $("#floor_id4").removeAttr("disabled");
+                $("#floor_id4").focus();
             } else {
                 $("#shelf2").removeAttr("disabled");
                 $("#shelf2").focus();
@@ -379,7 +393,9 @@
 
                 $("#shelf3").attr("disabled", "disabled");
 
+                $("#floor_id4").attr("disabled", "disabled");
 
+                $("#shelf4").attr("disabled", "disabled");
 
 
             }

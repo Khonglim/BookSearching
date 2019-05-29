@@ -114,7 +114,35 @@ class CategoryController extends Controller
 
     public function destroych(Request $request)
     {
-       
+
+           if($request->checkBox == 1){
+
+            DB::table('location_book')->where('floor_id', $request->floor_id3)
+            ->where('shelf', $request->shelf3)
+            ->update(['floor_id' => $request->floor_id4 ,  'shelf' => $request->shelf4]);
+            return redirect('category');
+           }else{
+
+            DB::table('location_book')->where('floor_id', $request->floor_id)
+            ->where('shelf', $request->shelf)
+            ->where('call_b', $request->call_b)
+            ->update(['floor_id' => $request->floor_id2 ,  'shelf' => $request->shelf2]);
+            return redirect('category');
+
+
+           }
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
