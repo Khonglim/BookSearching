@@ -118,7 +118,14 @@ p.indent{
                     <hr>
                     <p>ชั้น: {{$floor}} อาคาร นวมินทร์ </p>
                     <hr>
-                    <p>ตู้หมายเลข: โปรดดูจากแผนที่ด้านล่างที่มีสัญญาลักณ์  <img src="{{asset('images/location2.gif')}}"  style=" position: relative;"> </p>
+                    <p>ตู้หมายเลข:
+                                 @foreach ($floor1 as $item)
+                                              {{$item->shelf}},
+                                 @endforeach 
+
+
+
+                        <img src="{{asset('images/location2.gif')}}"  style=" position: relative;"> </p>
             <a href="{{url('/')}}"    class="btn btn-info" >   ย้อนกลับ         </a>
                   </div>
                   <div class="scroll">
