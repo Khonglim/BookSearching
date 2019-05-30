@@ -77,6 +77,7 @@
                     <li class="header">การจัดการ</li>
                     <li><a href="{{url('/home')}}"><i class="fa fa-circle-o text-red"></i> <span>การจัดการชั้น</span></a></li>
                     <li><a href="{{url('/category')}}"><i class="fa fa-circle-o text-yellow"></i> <span>หมวดหนังสือ</span></a></li>
+                    <li><a href="{{url('/category')}}"><i class="fa  fa-cloud-download"></i> <span>อัพเดทฐานข้อมูล</span></a></li>
 
             </ul>
     </section>
