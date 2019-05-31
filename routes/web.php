@@ -30,45 +30,7 @@ Route::get('/eng', function () {
 
 
 Route::get('/', function () {
-    $ch = curl_init();
-   // $url = "http://202.28.17.35/api4lib/api/index.php/GetListOfItmesFromCallNoRange/%7CaA/%7CaZ/bcm/tha";
-  // $url = "http://202.28.17.35/api4lib/api/index.php/GetListOfItmesFromCallNoRange/%7CaA/%7CaP/bcm/eng";
-   //curl_setopt($ch, CURLOPT_URL, $url);
-   //  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    //$output = json_decode(curl_exec($ch));
-   // curl_close($ch);
 
-
-  // $book = $output->ListOfItemsFromCallNoRange;
-   //Bookapi::truncate();
-   //foreach ($book as $r) {
-
-    //   $bookapi = new Bookapi();
-     //  $bookapi->barcode = $r->barcode;
-    //   $bookapi->location_code = $r->location_code ;
-    //   $bookapi->bib_record_id = $r->bib_record_id ;
-    //    $bookapi->item_record_id = $r->item_record_id ;
-    //   $bookapi->best_title = $r->best_title ;
-    //    $bookapi->best_author = $r->best_author ;
-     //   $bookapi->item_status_code = $r->item_status_code ;
-    //    $bookapi->use3_count = $r->use3_count ;
-    //    $bookapi->copy_use_count = $r->copy_use_count ;
-     //   $bookapi->due_gmt = $r->due_gmt ;
-     //   $bookapi->language_code = $r->language_code ;
-
-       // $e=explode("|",$r->callno);
-      //  $cut1=substr($e[1],1);
-       // $cut2=substr($e[2],1);
-      //  $bookapi->callno =  $cut1;
-      //  $bookapi->group_code = $r->group_code ;
-      //  $bookapi->class = $r->class ;
-     //   $bookapi->class_x = $r->class_x ;
-
-
-
-      // $bookapi->save();
-
-  //}
 
  //$data = DB::table('bookshelf')
  //->leftJoin('location_book', 'bookshelf.id_shelf', '=', 'location_book.shelf')->where('floor','=', 5)
