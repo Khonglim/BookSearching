@@ -191,7 +191,7 @@
                                                 <div class="modal-body">
                                                         {{ Form::open(['route' => ['shelfchange.destroy',$codewolds->floor_id, 'method' => "DELETE"] ]) }}
                                                         <input type="hidden" name="_method" value="delete" />
-                                                      <p>คุณต้องการลบร้าน {{$codewolds->id }}ใช่หรือไม่!!!!</p>
+                                                      <p>คุณต้องการลบใช่หรือไม่!!!!</p>
                                                       </div>
                                                       <div class="modal-footer">
                                                         <button type="summit" class="btn btn-danger">ลบ</button>

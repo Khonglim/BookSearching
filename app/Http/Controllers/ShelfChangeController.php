@@ -51,7 +51,7 @@ class ShelfChangeController extends Controller
     {
 
         DB::insert('insert into floor (floor_id) values ("'.$request->floor.'")');
-        Session::flash('flash_message','บันทึกข้อมูลจังหวัดสำเร็จ!! ');
+        Session::flash('flash_message','บันทึกข้อมูลสำเร็จ!! ');
         return redirect('home');
     }
 
@@ -91,7 +91,7 @@ class ShelfChangeController extends Controller
         DB::table('floor')
         ->where('id', $id)
         ->update(['floor_id' => $request->floor]);
-        Session::flash('flash_message','แก้ไขข้อมูลจังหวัดสำเร็จ!! ');
+        Session::flash('flash_message','แก้ไขข้อมูลสำเร็จ!! ');
         return redirect('home');
     }
 
