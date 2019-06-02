@@ -65,7 +65,7 @@ class BookcshelfController extends Controller
            if(count($floor1) >0 ){
             $bookshelf = DB::table('bookshelf')->where('floor','=',$floor1[0]->floor_id)->get();
             $floor = $floor1[0]->floor_id;
-            $locationbook = DB::table('location_book')->get();
+            $locationbook = DB::table('location_book')->where('language',$languages)->get();
             $data = array('bookshelf' =>  $bookshelf,
                             'cell'    =>  $cell,
                        'locationbook' =>  $locationbook,
