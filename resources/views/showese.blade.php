@@ -113,7 +113,6 @@ margin-left: -200px;
             <tr>
               <th>ชื่อหนังสือ</th>
               <th>ผู้แต่ง</th>
-
               <th>ตำแหน่ง</th>
             </thead>
 

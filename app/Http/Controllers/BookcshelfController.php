@@ -79,7 +79,7 @@ class BookcshelfController extends Controller
 
            else
            {
-                return "ขออภัยไม่มีข้อมูลในระบบ";
+                return view('nolocation');
            }
 }
 
