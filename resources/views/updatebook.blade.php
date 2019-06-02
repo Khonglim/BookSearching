@@ -108,10 +108,16 @@
 
       <div class="box-body">
 
-      <a href="{{url('/updatedataapi')}}" class="btn btn-success">อัพเดทฐานข้อมูล</a>
 
 
 
+      <form action="{{url('/updatedataapi')}}" name="testform" method="get" id="inviter">
+           <span id="sendingmail">
+               <input type="submit" name="submit" value="อัพเดทฐานข้อมูล" id="sendemail" class="btn btn-success">
+
+            </span>
+
+        </form>
 
 
 
@@ -146,5 +152,10 @@
 <script src="{{ asset('asset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js') }}"></script>
+
+<script>
+$("#inviter").submit(function(){     $("#sendingmail").html("ระบบกำลังอัพเดทโปรดรอสักครู่.....");     return true; });
+
+</script>
 </body>
 </html>
