@@ -169,11 +169,11 @@ Route::post('bookap', 'HomeController@postdata' )->name('bookapi');
 
 
 
-Route::get('/t', function () {
-    return view('layouts.floor');
+Route::get('/updatedata', function () {
+    return view('updatebook');
  });
 
-
+ Route::get('/updatedataapi', 'HomeController@updatebookapi');
 
 
 

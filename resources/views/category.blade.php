@@ -114,6 +114,7 @@
                     <li class="header">การจัดการ</li>
                     <li><a href="{{url('/home')}}"><i class="fa fa-circle-o text-red"></i> <span>การจัดการชั้น</span></a></li>
                     <li><a href="{{url('/category')}}"><i class="fa fa-circle-o text-yellow"></i> <span>หมวดหนังสือ</span></a></li>
+                    <li><a href="{{url('/updatedata')}}"><i class="fa  fa-cloud-download"></i> <span>อัพเดทฐานข้อมูล</span></a></li>
 
             </ul>
     </section>
@@ -129,7 +130,10 @@
 
       </h1>
       @if(Session::has('flash_message') )
-      <div class="alert alert-success d-flex align-items-center"> {!! session('flash_message') !!}</div>
+      <div class="alert alert-success d-flex align-items-center">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {!! session('flash_message') !!}
+        </div>
       @endif
     </section>
     <section class="content container-fluid">

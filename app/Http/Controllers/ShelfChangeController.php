@@ -50,7 +50,7 @@ class ShelfChangeController extends Controller
     public function store(Request $request)
     {
 
-        DB::insert('insert into floor (floor) values ("'.$request->floor.'")');
+        DB::insert('insert into floor (floor_id) values ("'.$request->floor.'")');
         Session::flash('flash_message','บันทึกข้อมูลจังหวัดสำเร็จ!! ');
         return redirect('home');
     }
