@@ -54,7 +54,7 @@
 
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini" >
+<body class="hold-transition skin-purple sidebar-mini" >
         <div id="overlay"></div>
 <div class="wrapper">
     <header class="main-header">
@@ -209,24 +209,24 @@
                         <hr>
                         <div class="form-group">
                           <label for="floor">ชั้นเดิม:</label>
-                          <input type="number" class="form-control" id="floor_id" name="floor_id" placeholder="ชั้น" required>
+                          <input type="number" class="form-control" id="floor_id" name="floor_id"  required>
                         </div>
                         <div class="form-group">
                                 <label for="floor">ตู้เดิม:</label>
-                                <input type="number" class="form-control" id="shelf" name="shelf" placeholder="ตู้" required>
+                                <input type="number" class="form-control" id="shelf" name="shelf"  required>
                               </div>
                               <div class="form-group">
                                     <label for="floor">หมวด:</label>
-                                    <input type="text" class="form-control" id="call_b" name="call_b" placeholder="หมวด" required>
+                                    <input type="text" class="form-control" id="call_b" name="call_b" required>
                                 </div>
                                    <br><br>
                                   <div class="form-group">
                                         <label for="floor">ชั้นใหม่:</label>
-                                        <input type="number" class="form-control" id="floor_id2" name="floor_id2" placeholder="ชั้น" required>
+                                        <input type="number" class="form-control" id="floor_id2" name="floor_id2"  required>
                                       </div>
                                       <div class="form-group">
                                               <label for="floor">ตู้ใหม่:</label>
-                                              <input type="number" class="form-control" id="shelf2" name="shelf2" placeholder="ตู้" required>
+                                              <input type="number" class="form-control" id="shelf2" name="shelf2"  required>
                                             </div>
                                           <hr>
                                   <div class="checkbox">
@@ -235,21 +235,21 @@
                                       <br> <br>
                                       <div class="form-group">
                                         <label for="floor">ชั้นเดิม:</label>
-                                        <input type="number" class="form-control" id="floor_id3" name="floor_id3" placeholder="ชั้น" required  disabled>
+                                        <input type="number" class="form-control" id="floor_id3" name="floor_id3"  required  disabled>
                                       </div>
                                       <div class="form-group">
                                               <label for="floor">ตู้เดิม:</label>
-                                              <input type="number" class="form-control" id="shelf3" name="shelf3" placeholder="ตู้" required   disabled>
+                                              <input type="number" class="form-control" id="shelf3" name="shelf3"   required   disabled>
                                         </div>
 
                                       <br><br>
                                       <div class="form-group">
                                         <label for="floor">ชั้นใหม่:</label>
-                                        <input type="number" class="form-control" id="floor_id4" name="floor_id4" placeholder="ชั้น" required  disabled>
+                                        <input type="number" class="form-control" id="floor_id4" name="floor_id4" required  disabled>
                                       </div>
                                       <div class="form-group">
                                               <label for="floor">ตู้ใหม่:</label>
-                                              <input type="number" class="form-control" id="shelf4" name="shelf4" placeholder="ตู้" required   disabled>
+                                              <input type="number" class="form-control" id="shelf4" name="shelf4"  required   disabled>
                                         </div>
                 </div>
                 <div class="modal-footer">
@@ -358,11 +358,28 @@
         $("#checkBox").click(function () {
             if ($(this).is(":checked")) {
                 $("#shelf2").attr("disabled", "disabled");
+                $("#shelf2").val(" ");
+
                 $("#floor_id2").attr("disabled", "disabled");
+                $("#floor_id2").val(" ");
+
                 $("#call_b").attr("disabled", "disabled");
+                $("#call_b").val(" ");
+
+
                 $("#shelf").attr("disabled", "disabled");
+                $("#shelf").val(" ");
+
                 $("#floor_id").attr("disabled", "disabled");
+                $("#floor_id").val(" ");
+
+
+
                 $("#cattalog").attr("disabled", "disabled");
+                $("#cattalog").val(" ");
+
+
+
                 $("#shelf3").removeAttr("disabled");
                 $("#shelf3").focus();
 
@@ -394,12 +411,16 @@
                 $("#cattalog").focus();
 
                 $("#floor_id3").attr("disabled", "disabled");
+                $("#floor_id3").val(" ");
 
                 $("#shelf3").attr("disabled", "disabled");
+                $("#shelf3").val(" ");
 
                 $("#floor_id4").attr("disabled", "disabled");
-
+                $("#floor_id4").val(" ");
+                
                 $("#shelf4").attr("disabled", "disabled");
+                $("#shelf4").val(" ");
 
 
             }

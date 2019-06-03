@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="{{ asset('asset/dist/css/skins/_all-skins.min.css') }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-purple sidebar-mini">
 <div class="wrapper">
   <header class="main-header">
     <a href="{{url('/home')}}" class="logo">
@@ -26,27 +26,18 @@
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
-
           <div class="navbar-custom-menu">
-
-
             <ul class="nav navbar-nav">
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-                        <img src="{{asset('/images/icon.jpg')}}" class="img-circle" alt="User Image"   width="20px"  height="20px">
+                    <img src="{{asset('/images/icon.jpg')}}" class="img-circle" alt="User Image"   width="20px"  height="20px">
                   <span class="hidden-xs">admin</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="{{asset('/images/icon.jpg')}}" class="img-circle" alt="User Image">
-
-
                   </li>
-                  <!-- Menu Body -->
-
-                  <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-right">
                         <a  href="{{ route('logout') }}"
@@ -61,12 +52,8 @@
                   </li>
                 </ul>
               </li>
-
             </ul>
           </div>
-
-
-
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
@@ -100,34 +87,14 @@
     <section class="content container-fluid">
    <div class="box box-info">
     <div class="box-header with-border">
-
             อัพเดทข้อมูลหนังสือ
-
-
     </div>
-
       <div class="box-body">
-
-
-
-
       <form action="{{url('/updatedataapi')}}" name="testform" method="get" id="inviter">
            <span id="sendingmail">
                <input type="submit" name="submit" value="อัพเดทฐานข้อมูล" id="sendemail" class="btn btn-success">
-
             </span>
-
         </form>
-
-
-
-
-
-
-
-
-
-
       </div>
       <div class="box-footer">
       </div>
@@ -152,10 +119,8 @@
 <script src="{{ asset('asset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js') }}"></script>
-
 <script>
 $("#inviter").submit(function(){     $("#sendingmail").html("ระบบกำลังอัพเดทโปรดรอสักครู่.....");     return true; });
-
 </script>
 </body>
 </html>
