@@ -126,7 +126,7 @@ class HomeController extends Controller
 
     }
     Session::flash('flash_message',' อัพเดทข้อมูลสำเร็จ! ');
-    return redirect('admin.updatedata');
+    return redirect('updatedata');
 
     }
 

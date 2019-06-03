@@ -99,7 +99,7 @@ class BookcshelfController extends Controller
 
             Session::flash('flash_message','ลบข้อมูลสำเร็จ!! ');
 
-             return redirect('admin.home');
+             return redirect('home');
         }
 
 
