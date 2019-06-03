@@ -20,7 +20,7 @@ class BookcshelfController extends Controller
                         );
 
 
-    return view('bookshelf', $data);
+    return view('admin.bookshelf', $data);
 
     }
 
@@ -98,7 +98,7 @@ class BookcshelfController extends Controller
 
             Session::flash('flash_message','ลบข้อมูลสำเร็จ!! ');
 
-             return redirect('home');
+             return redirect('admin.home');
         }
 
 

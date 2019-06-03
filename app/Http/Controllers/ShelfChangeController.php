@@ -26,7 +26,7 @@ class ShelfChangeController extends Controller
 
 
     );
-        return view('home' ,$data);
+        return view('admin.home' ,$data);
     }
 
     /**
@@ -36,7 +36,7 @@ class ShelfChangeController extends Controller
      */
     public function create()
     {
-        return view('floor.addFloor');
+        
 
         //
     }

@@ -19,7 +19,7 @@
 <div class="wrapper">
   <header class="main-header">
     <a href="{{url('/home')}}" class="logo">
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>A</b>BK</span>
       <span class="logo-lg"><b>Admin</b>BOOK</span>
     </a>
     <nav class="navbar navbar-static-top" role="navigation">

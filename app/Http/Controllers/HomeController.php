@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
 
-      //
+   
 
 
     }
@@ -121,7 +121,7 @@ class HomeController extends Controller
 
     }
     Session::flash('flash_message',' อัพเดทข้อมูลสำเร็จ! ');
-    return redirect('updatedata');
+    return redirect('admin.updatedata');
 
     }
 

@@ -19,7 +19,7 @@ class CategoryController extends Controller
         $category= Category::all();
          $data = array('category' => $category  );
 
-        return view("category",$data);
+        return view("admin.category",$data);
     }
 
     /**
@@ -49,7 +49,7 @@ class CategoryController extends Controller
         $category->save();
 
         Session::flash('flash_message','เพิ่มข้อมูลสำเร็จ!! ');
-        return redirect('category');
+        return redirect('admin.category');
 
     }
 
@@ -88,7 +88,7 @@ class CategoryController extends Controller
         ->where('id', $id)
         ->update(['floor_id' => $request->floor_id, 'shelf' => $request->shelf,'call_b' => $request->call_b,'language'=>$request->language]);
         Session::flash('flash_message','แก้ไขข้อมูลสำเร็จ!! ');
-        return redirect('category');
+        return redirect('admin.category');
     }
 
     /**
@@ -101,7 +101,7 @@ class CategoryController extends Controller
     {
       DB::table('location_book') ->where('id', '=', $id)->delete();
       Session::flash('flash_message','ลบข้อมูลสำเร็จ!! ');
-      return redirect('category');
+      return redirect('admin.category');
     }
 
 
@@ -120,14 +120,14 @@ class CategoryController extends Controller
             DB::table('location_book')->where('floor_id', $request->floor_id3)
             ->where('shelf', $request->shelf3)
             ->update(['floor_id' => $request->floor_id4 ,  'shelf' => $request->shelf4]);
-            return redirect('category');
+            return redirect('admin.category');
            }else{
 
             DB::table('location_book')->where('floor_id', $request->floor_id)
             ->where('shelf', $request->shelf)
             ->where('call_b', $request->call_b)
             ->update(['floor_id' => $request->floor_id2 ,  'shelf' => $request->shelf2]);
-            return redirect('category');
+            return redirect('admin.category');
 
 
            }

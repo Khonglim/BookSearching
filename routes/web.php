@@ -170,7 +170,7 @@ Route::post('bookap', 'HomeController@postdata' )->name('bookapi');
 
 
 Route::get('/updatedata', function () {
-    return view('updatebook');
+    return view('admin.updatebook');
  });
 
  Route::get('/updatedataapi', 'HomeController@updatebookapi');
