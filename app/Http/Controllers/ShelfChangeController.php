@@ -8,6 +8,14 @@ use App\Extensions\MongoSessionStore;
 use Illuminate\Support\Facades\Session;
 class ShelfChangeController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +44,7 @@ class ShelfChangeController extends Controller
      */
     public function create()
     {
-        
+
 
         //
     }
@@ -49,7 +57,6 @@ class ShelfChangeController extends Controller
      */
     public function store(Request $request)
     {
-
         DB::insert('insert into floor (floor_id) values ("'.$request->floor.'")');
         Session::flash('flash_message','บันทึกข้อมูลสำเร็จ!! ');
         return redirect('home');

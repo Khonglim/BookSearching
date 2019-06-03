@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class BookcshelfController extends Controller
 {
+
     public function index($id){
     $b = $id;
     $bookshelf = DB::table('bookshelf')->where('floor', '=',$id)->get();

@@ -143,10 +143,7 @@ Route::get('destroy/{id}','CategoryController@destroy');
 Route::get('categorych','CategoryController@destroych');
 
 Route::get('home','ShelfChangeController@index')->name('home');
-Route::resources([
-    'bookshow' => 'BookSECController',
-    'posts' => 'PostController'
-]);
+
 Route::get('addAndRemove', 'HomeController@ajaxRequest');
 Route::post('ajaxRequest', 'HomeController@ajaxRequestPost');
 Route::get('addXY', 'HomeController@update');
