@@ -130,22 +130,62 @@ class ShelfChangeController extends Controller
 
     public function destroyfloor(Request $request)
     {
-        $bookshelf = DB::table('bookshelf') ->where('id_shelf', '>', $request->shelf)->where('floor', '=', $request->floor) ->get();
-        DB::table('bookshelf')->where('id_shelf', '=',$request->shelf)->where('floor', '=', $request->floor)->delete();
-        foreach ($bookshelf as $p){
-           DB::table('bookshelf') ->where('id_shelf', '=',$p->id_shelf)
-           ->where('floor', '=', $request->floor)
-           ->update(['id_shelf' =>$p->id_shelf-1]);
-
-       }
+        //$bookshelf = DB::table('bookshelf') ->where('id_shelf', '>', $request->shelf)->where('floor', '=', $request->floor) ->get();
 
 
-       $count= DB::table('bookshelf')->where('floor', '=',$request->floor)->count();
-       DB::table('floor')->where('floor_id', $request->floor)->update(['shelf_all' => $count]);
 
-       Session::flash('flash_message','ลบข้อมูลตู้สำเร็จ!! ');
+      $data =  DB::table('location_book')->where('shelf', '=',$request->shelf)->where('floor_id', '=', $request->floor)->count();
 
-         return redirect('home');
+      if ( $data > 0){
+
+            Session::flash('flash_message_error','ไม่สามารถลบตู้ยังมีหนังสืออยู่ในตู้นี้ !! ');
+
+            return redirect('home');
+
+
+
+        }else{
+         $book =  DB::table('bookshelf')->where('id_shelf', '=',$request->shelf)->where('floor', '=', $request->floor)->count();
+         if ( $book > 0){
+            DB::table('bookshelf')->where('id_shelf', '=',$request->shelf)->where('floor', '=', $request->floor)->delete();
+            $count= DB::table('bookshelf')->where('floor', '=',$request->floor)->count();
+            DB::table('floor')->where('floor_id', $request->floor)->update(['shelf_all' => $count]);
+            Session::flash('flash_message','ลบข้อมูลตู้สำเร็จ!! ');
+            return redirect('home');
+
+
+
+         }else{
+
+            Session::flash('flash_message_error2','ตู้ที่ท่านเลือกไม่มีอยู่ในระบบหรือลบไปแล้ว!!!!!');
+
+            return redirect('home');
+
+
+
+
+         }
+
+
+
+
+
+
+        }
+
+
+
+
+
+       // foreach ($bookshelf as $p){
+        //   DB::table('bookshelf') ->where('id_shelf', '=',$p->id_shelf)
+         //  ->where('floor', '=', $request->floor)
+        //   ->update(['id_shelf' =>$p->id_shelf-1]);
+
+     //  }
+
+
+
     }
 
 

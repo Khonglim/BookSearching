@@ -43,8 +43,8 @@ class BookcshelfController extends Controller
 			$id = $p[0];
 			$row = $p[1];
 			$cell = $p[2];
-			$class = $p[3];
-            $text = $p[4];
+
+            $text = $p[3];
 
 			// instead of print, you can store accepted parameteres to the database
             DB::insert('insert into bookshelf (row,id_shelf,cell,floor) values ("'.$row.'","'.$text.'","'.$cell.'","'.$f.'")');

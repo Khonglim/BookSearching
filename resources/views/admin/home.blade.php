@@ -98,6 +98,21 @@
           {!! session('flash_message') !!}
         </div>
       @endif
+      @if(Session::has('flash_message_error') )
+
+      <div class="alert alert-danger d-flex align-items-center">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {!! session('flash_message_error') !!}
+        </div>
+      @endif
+
+      @if(Session::has('flash_message_error2') )
+      <div class="alert alert-warning d-flex align-items-center">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {!! session('flash_message_error2') !!}
+        </div>
+      @endif
+
     </section>
     <section class="content container-fluid">
    <div class="box box-info">
