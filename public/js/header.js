@@ -16,7 +16,7 @@ headerInit = function () {
 	// add "header" DIV element
 	document.body.insertBefore(header, document.body.firstChild);
 	// apply inner HTML
-	header.innerHTML = '<div style="background-color:#CCFFFF;padding:10px;text-align:center;font-size:20px;font-weight:bold">' + title + '</div>' ;
+	header.innerHTML = '<div style="background-color:#00000;padding:10px;text-align:center;font-size:20px;font-weight:bold">' + title + '</div>' ;
 };
 
 // add onload event listener

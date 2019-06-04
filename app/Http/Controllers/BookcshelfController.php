@@ -43,7 +43,6 @@ class BookcshelfController extends Controller
 			$id = $p[0];
 			$row = $p[1];
 			$cell = $p[2];
-
             $text = $p[3];
 
 			// instead of print, you can store accepted parameteres to the database

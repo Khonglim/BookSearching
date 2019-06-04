@@ -9,7 +9,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="{{asset('js/header.js')}}"></script>
 		<script type="text/javascript" src="{{asset('js/redips-drag-min.js')}}"></script>
-		<title>เเก้ไขตู้หนังสือ</title>
+		<title>ปรับตำแหน่งตู้หนังสือ</title>
 		<style>
 		/*
 
@@ -74,7 +74,9 @@ div#redips-drag td {
 	width: 44px;
 	padding: 0px;
 }
-
+input {
+    text-align: center;
+}
 
 /* toggle checkboxes at the bottom */
 
@@ -103,7 +105,7 @@ p.indent{
                     <tr style="background-color: #eee">
                         <td><a href="{{url('/home')}}" class=" btn btn-primary">ย้อนกลับ</a></td>
                         <td id="message" class="redips-mark" title="You can not drop here">Table3</td>
-                    <td><div id="d1" class="redips-drag t3 redips-clone" title="infinite cloning">  <input type="text" style="width: 31px" value=""/>    </div> </td>
+                    <td><div id="d1" class="redips-drag t3 redips-clone" title="infinite cloning"> <input type="text" style="width: 31px"        value=""/>    </div> </td>
                     <td>
                     <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">บันทึก</button>
                     <div class="modal fade" id="myModal" role="dialog">
@@ -130,7 +132,7 @@ p.indent{
 				<table id="table1">
 					<tbody>
                             <tr>
-                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==0 ) <div  class="redips-drag t1" title="infinite cloning">   <input type="text" style="width: 31px" value="{{$bookshelfs->id_shelf}}"> </div> @endif @endforeach  </td>
+                              <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==0 ) <div  class="redips-drag t1" title="infinite cloning">   <input type="text" style="width: 31px" value="{{$bookshelfs->id_shelf}}" required> </div> @endif @endforeach  </td>
                               <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==1 ) <div  class="redips-drag t1" title="infinite cloning">   <input type="text" style="width: 31px" value="{{$bookshelfs->id_shelf}}"> </div> @endif @endforeach  </td>
                               <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==2 ) <div  class="redips-drag t1" title="infinite cloning"><input type="text" style="width: 31px" value="{{$bookshelfs->id_shelf}}"> </div>  @endif   @endforeach  </td>
                               <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==3 ) <div  class="redips-drag t1" title="infinite cloning"><input type="text" style="width: 31px" value="{{$bookshelfs->id_shelf}}"> </div>  @endif   @endforeach  </td>

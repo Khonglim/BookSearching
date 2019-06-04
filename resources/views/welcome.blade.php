@@ -52,8 +52,7 @@
         </div>
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
-          <li class="active"><a href="{{url('/')}}"> <i class=" fa fa-folder-open"></i> รายการหนังสือภาษาไทย<span class="sr-only">(current)</span></a></li>
-          <li ><a href="{{url('/eng')}}"> <i class=" fa  fa-send-o "></i> รายการหนังสือภาษาอังกฤษ</a></li>
+          <li class="active"><a href="{{url('/')}}"> <i class=" fa fa-folder-open"></i> รายการหนังสือทั้งหมด<span class="sr-only">(current)</span></a></li>
 
           </ul>
 

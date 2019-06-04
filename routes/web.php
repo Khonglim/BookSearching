@@ -16,15 +16,6 @@ use Ixudra\Curl\Facades\Curl;
 |
 */
 
-Route::get('/eng', function () {
-
-    $pagination = Bookapi::where('language_code', '=', 'eng')->paginate(16);
-    $data  = array('pagination' =>$pagination , );
-    return view('book_eng',$data);
-
-
-});
-
 
 
 
@@ -69,7 +60,7 @@ Route::get('/', function () {
 //}
 
 
-$pagination = Bookapi::where('language_code', '=', 'tha')->paginate(16);
+$pagination = Bookapi::simplePaginate(16);
 $data  = array('pagination' =>$pagination , );
 
 
@@ -81,7 +72,7 @@ $data  = array('pagination' =>$pagination , );
 Route::any ( '/search', function () {
     $q = Input::get ( 'q' );
     if($q != ""){
-    $pagination = Bookapi::where ( 'best_title', 'LIKE', '%' . $q . '%' )->orWhere ( 'best_author', 'LIKE', '%' . $q . '%' )->where('language_code', '=', 'tha')->paginate (16)->setPath ( '' )
+    $pagination = Bookapi::where ( 'best_title', 'LIKE', '%' . $q . '%' )->orWhere ( 'best_author', 'LIKE', '%' . $q . '%' )->simplePaginate(16)->setPath ( '' )
 
 
     ;
@@ -102,28 +93,7 @@ return view ( 'welcome' )->withMessage ( 'ไม่พบหนังสือ�
    });
 
 
-   Route::any ( '/searcheng', function () {
-    $q = Input::get ( 'q' );
-    if($q != ""){
-    $pagination = Bookapi::where ( 'best_title', 'LIKE', '%' . $q . '%' )->orWhere ( 'best_author', 'LIKE', '%' . $q . '%' )->where('language_code', '=', 'eng')->paginate (16)->setPath ( '' )
 
-
-    ;
-  $pagination->appends( array (
-        'q' => Input::get ( 'q' )
-      ) );
-
-
-    if (count ( $pagination ) > 0){
-    return view ( 'welcome', )->withDetails( $pagination )->withQuery ( $q );
-   }
-
-}
-
-
-
-return view ( 'welcome' )->withMessage ( 'ไม่พบหนังสือที่คุณค้นหา...' )->withQuery ( $q );
-   });
 
 
 
