@@ -56,7 +56,9 @@ class BookcshelfController extends Controller
         DB::table('floor')->where('floor_id', $f)->update(['shelf_all' => $count]);
 
     }
-        public function locationshow($id,$namebook,$language){
+
+
+public function locationshow($id,$namebook,$language){
             $cell=$id;
             $namebooks = $namebook;
             $languages =  $language;
@@ -84,7 +86,17 @@ class BookcshelfController extends Controller
            }
 }
 
-        public function delete($id)
+
+
+
+
+
+
+
+
+
+
+public function delete($id)
         {
             $floor = DB::table('bookshelf') ->where('id_shelf', '>', $id)->get();
 

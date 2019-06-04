@@ -266,6 +266,8 @@
   immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 </div>
+
+
 <script src="{{ asset('asset/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('asset/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('asset/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
@@ -276,7 +278,11 @@
 <script src="{{ asset('asset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js') }}"></script>
-
+<script>
+        $(document).ready( function () {
+       $('#table1').DataTable();
+   } );
+         </script>
 
 
 
