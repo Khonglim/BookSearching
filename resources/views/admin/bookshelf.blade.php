@@ -104,15 +104,43 @@ p.indent{
                         <td><a href="{{url('/home')}}" class=" btn btn-primary">ย้อนกลับ</a></td>
                         <td id="message" class="redips-mark" title="You can not drop here">Table3</td>
                     <td><div id="d1" class="redips-drag t3 redips-clone" title="infinite cloning"></div> </td>
-                    <td><input type="button" value="บันทึก" class="btn btn-success" onclick="save('json')" /></td>
+                    <td>
+                    <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">บันทึก</button>
+                    <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">ยืนยันการบันทึก</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <p>ต้องการบันทึก.</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <input type="button" value="ใช่" class="btn btn-success" onclick="save('json')" />
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+
+
+
+
+
+
+                    </td>
+                    <td><input type=button value="รีเซตการวาง" class="btn btn-warning" onClick="javascript:location.reload();"></td>
                     </tr>
 
 
 
                 </table>
-
 				<table id="table1">
-
 					<tbody>
                             <tr>
                               <td> @foreach ($bookshelf as $bookshelfs ) @if($bookshelfs->row == 0 && $bookshelfs->cell ==0 ) <div  class="redips-drag t1" title="infinite cloning">{{	$bookshelfs->id_shelf}}</div>  @endif   @endforeach  </td>
