@@ -108,8 +108,6 @@ p.indent{
                     <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">บันทึก</button>
                     <div class="modal fade" id="myModal" role="dialog">
                             <div class="modal-dialog">
-
-                              <!-- Modal content-->
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -123,22 +121,11 @@ p.indent{
                                   <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
                                 </div>
                               </div>
-
                             </div>
                           </div>
-
-
-
-
-
-
-
                     </td>
                     <td><input type=button value="รีเซตการวาง" class="btn btn-warning" onClick="javascript:location.reload();"></td>
                     </tr>
-
-
-
                 </table>
 				<table id="table1">
 					<tbody>
