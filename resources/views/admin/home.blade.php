@@ -218,33 +218,7 @@
                                             </div>
                                           </div>
 
-                                          <a href="#" class="btn btn-primary btn-xs"  data-toggle="modal" data-target="#de{{$codewolds->id}}"><i class="fa fa-bomb">ลบตู้หนังสือ</i></a>
-                                          <div id="de{{$codewolds->id}}" class="modal fade" role="dialog">
-                                            <div class="modal-dialog">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                  <h4 class="modal-title">ลบตู้หนังสือชั้น {{$codewolds->floor_id}}</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form class="form-inline" action="{{url('/shelfchange/de')}}"  method="POST" id="form-data" enctype="multipart/form-data" files="true">
-                                                        @csrf
-                                                        <div class="form-group">
-                                                          <label for="floor">เลขตู้</label>
-                                                          <input type="number" class="form-control" id="shelf" name="shelf" placeholder="1" required>
-                                                        <input type="hidden" name="floor"   value="{{$codewolds->floor_id}}">
-                                                        </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                  <button type="submit" class="btn btn-success">บันทึก</button>
-                                                </form>
-                                                  <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-
-                                                </div>
-                                              </div>
-
-                                            </div>
-                                          </div>
+                                   
 
 
                         </td>

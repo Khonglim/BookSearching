@@ -104,7 +104,7 @@ return view ( 'welcome' )->withMessage ( 'ไม่พบหนังสือ�
 
 Auth::routes();
 Route::resource('shelfchange', 'ShelfChangeController');
-Route::POST('shelfchange/de','ShelfChangeController@destroyfloor');
+
 
 
 Route::resource('category', 'CategoryController');
@@ -134,6 +134,7 @@ Route::get('locationShow/{id}/{namebook}/{language}','BookcshelfController@locat
 
 Route::post('bookap', 'HomeController@postdata' )->name('bookapi');
 
+Route::post('bookdelete', 'PostController@bookdeletes' );
 
 
 Route::get('/updatedata', function () {

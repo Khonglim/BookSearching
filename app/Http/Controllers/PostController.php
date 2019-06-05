@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 
 {
@@ -78,4 +80,99 @@ class PostController extends Controller
 
               ';})->toJson();
     }
+
+
+    public function bookdeletes(Request $request){
+
+        $validator = Validator::make($request->input(), array(
+            'shelf' => 'required',
+
+        ));
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error'    => true,
+                'messages' => $validator->errors(),
+            ], 422);
+        }
+
+        $data =  DB::table('location_book')->where('shelf', '=',$request->shelf)->where('floor_id', '=', $request->floor)->count();
+
+        if ( $data > 0){
+
+            $data =[ 'flash' => 'ไม่สามารถลบตู้นี้ได้ยังมีหมวดหนังสือยู่ชั้นนี้กรุณาย้ายหมวดก่อนค่ะ! '  ];
+
+              return response()->json([
+                'error'    => true,
+                'messages' => $data,
+            ], 422);
+
+
+
+          }else{
+           $book =  DB::table('bookshelf')->where('id_shelf', '=',$request->shelf)->where('floor', '=', $request->floor)->count();
+           if ( $book > 0){
+              DB::table('bookshelf')->where('id_shelf', '=',$request->shelf)->where('floor', '=', $request->floor)->delete();
+              $count= DB::table('bookshelf')->where('floor', '=',$request->floor)->count();
+
+
+
+              return response()->json(['error'    => false,], 200);
+
+
+
+           }else{
+
+            $data =[ 'flash' => 'ตู้ที่ท่านเลือกไม่มีอยู่ในระบบค่ะ'  ];
+
+            return response()->json([
+              'error'    => true,
+              'messages' => $data,
+          ], 422);
+
+
+
+
+           }
+
+
+
+
+
+
+          }
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

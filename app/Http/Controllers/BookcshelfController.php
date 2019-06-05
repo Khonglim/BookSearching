@@ -33,16 +33,16 @@ class BookcshelfController extends Controller
 
 		// decode JSON object (it shouldn't be decoded as associative array)
 		$arr = json_decode($p);
-        // open loop through each array element
+
         //DB::delete('delete from bookshelf where floor = ?',[$f]);
         DB::table('bookshelf')->where('floor',$f)->delete();
         DB::statement("ALTER TABLE bookshelf AUTO_INCREMENT =  1");
-
+       // open loop through each array element
         foreach ($arr as $p){
-		 	// set id, row index and cell index
+		 	// set id, row index and text 
 			$id = $p[0];
 			$row = $p[1];
-			$cell = $p[2];
+            $cell = $p[2];
             $text = $p[3];
 
 			// instead of print, you can store accepted parameteres to the database
