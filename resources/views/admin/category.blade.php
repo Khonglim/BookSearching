@@ -418,7 +418,7 @@
 
                 $("#floor_id4").attr("disabled", "disabled");
                 $("#floor_id4").val(" ");
-                
+
                 $("#shelf4").attr("disabled", "disabled");
                 $("#shelf4").val(" ");
 
