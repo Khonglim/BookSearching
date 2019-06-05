@@ -73,7 +73,7 @@
                       <form action="/search" method="POST" role="search">
                         @csrf
                         <div class="input-group">
-                            <input type="text" class="form-control" name="q"   placeholder="ค้นหาหนังสือ ex ภาษา c"> <span class="input-group-btn">
+                            <input type="text" class="form-control" name="q"   placeholder="ค้นหาหนังสือ"> <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
