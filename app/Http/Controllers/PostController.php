@@ -115,8 +115,6 @@ class PostController extends Controller
               DB::table('bookshelf')->where('id_shelf', '=',$request->shelf)->where('floor', '=', $request->floor)->delete();
               $count= DB::table('bookshelf')->where('floor', '=',$request->floor)->count();
               DB::table('floor')->where('floor_id', $request->floor)->update(['shelf_all' => $count]);
-
-
               return response()->json(['error'    => false,], 200);
 
 
