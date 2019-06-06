@@ -112,7 +112,20 @@ class ShelfChangeController extends Controller
     {
        // $floor = DB::table('floor') ->where('floor', '>', $id)->get();
 
-         DB::table('floor')->where('floor_id', '=',$id)->delete();
+      $count = DB::table('bookshelf')->where('floor', '=',$id)->count();
+if($count > 0 ){
+
+    Session::flash('flash_message_error','ไม่สามารถลบได้มีตู้หนังสืออยู่ใั้นนี้ !! ');
+
+    return redirect('home');
+
+}else {
+    DB::table('floor')->where('floor_id', '=',$id)->delete();
+    Session::flash('flash_message','ลบข้อมูลชั้นสำเร็จ!! ');
+    return redirect('home');
+}
+
+
         // foreach ($floor as $p){
         //    DB::table('floor')
         //    ->where('floor', '=',$p->floor_id)
@@ -121,9 +134,7 @@ class ShelfChangeController extends Controller
        // }
 
 
-         Session::flash('flash_message','ลบข้อมูลชั้นสำเร็จ!! ');
 
-         return redirect('home');
     }
 
 

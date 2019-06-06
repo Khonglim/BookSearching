@@ -4,6 +4,7 @@
 		<meta name="description" content="Drag and drop table content with JavaScript"/>
 		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <link rel="shortcut icon" href="{{asset('images/favicon.jpg')}}" type="image/x-icon"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -121,7 +122,7 @@ p.indent{
                     <p>ตู้หมายเลข:
                                  @foreach ($floor1 as $item)
                                               {{$item->shelf}},
-                                 @endforeach 
+                                 @endforeach
 
 
 

@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link rel="shortcut icon" href="{{asset('images/favicon.jpg')}}" type="image/x-icon"/>
 
 		<title>ปรับตำแหน่งตู้หนังสือ</title>
 		<style>

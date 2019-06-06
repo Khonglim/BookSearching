@@ -69,7 +69,7 @@ class PostController extends Controller
 
                             </div>
                             <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">บันทึก</button>
+                            <button type="submit" class="btn btn-success">ลบ</button>
                             </form>
                               <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                             </div>
