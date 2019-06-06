@@ -30,29 +30,81 @@ class BookcshelfController extends Controller
     {
         $p = stripslashes($request->table_contents);
         $f = $request->floor;
+        $arr = json_decode($p);
+        $number = 0;
+        $arr_txt_new = array("");
+       $x=0;
+       $p=0;
 
-		// decode JSON object (it shouldn't be decoded as associative array)
-		$arr = json_decode($p);
-
-        //DB::delete('delete from bookshelf where floor = ?',[$f]);
-        DB::table('bookshelf')->where('floor',$f)->delete();
-        DB::statement("ALTER TABLE bookshelf AUTO_INCREMENT =  1");
-       // open loop through each array element
         foreach ($arr as $p){
-		 	// set id, row index and text 
-			$id = $p[0];
-			$row = $p[1];
-            $cell = $p[2];
-            $text = $p[3];
-
-			// instead of print, you can store accepted parameteres to the database
-            DB::insert('insert into bookshelf (row,id_shelf,cell,floor) values ("'.$row.'","'.$text.'","'.$cell.'","'.$f.'")');
-            //print "Id=$id Row=$row Cell=$cell Class=$class Text=$text";
-
+            $arr_txt_new[$number] = $p[3];
+            $number ++;
         }
 
-        $count= DB::table('bookshelf')->where('floor', '=',$f )->count();
-        DB::table('floor')->where('floor_id', $f)->update(['shelf_all' => $count]);
+        for ($i=0; $i<count($arr_txt_new); $i++) {
+            for ($j=$i+1; $j<count($arr_txt_new); $j++) {
+
+                if( $arr_txt_new[$i] ==  $arr_txt_new[$j]  ){
+
+                    $x =1 ;
+                    $p = $arr_txt_new[$i];
+                }
+
+            }
+
+          }
+
+
+          if($x==1){
+            $data =[ 'flash' => 'ตู้ที่ท่านเลือกไม่มีอยู่ในระบบค่ะ',$p  ];
+            return response()->json([
+                'error' => true,
+                'task'  => $data,
+            ], 422);
+
+
+            }else {
+
+
+                DB::table('bookshelf')->where('floor',$f)->delete();
+                DB::statement("ALTER TABLE bookshelf AUTO_INCREMENT =  1");
+               // open loop through each array element
+                foreach ($arr as $p){
+                     // set id, row index and text
+                    $id = $p[0];
+                    $row = $p[1];
+                    $cell = $p[2];
+                    $text = $p[3];
+
+                    // instead of print, you can store accepted parameteres to the database
+                    DB::insert('insert into bookshelf (row,id_shelf,cell,floor) values ("'.$row.'","'.$text.'","'.$cell.'","'.$f.'")');
+                    //print "Id=$id Row=$row Cell=$cell Class=$class Text=$text";
+
+                }
+
+
+
+
+                $count= DB::table('bookshelf')->where('floor', '=',$f )->count();
+                DB::table('floor')->where('floor_id', $f)->update(['shelf_all' => $count]);
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
 
     }
 

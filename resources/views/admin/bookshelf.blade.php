@@ -60,6 +60,11 @@ div#redips-drag td {
     text-align: center;
 }
 
+.cole{
+    background-color: #C0F9BD;
+
+}
+
 /* toggle checkboxes at the bottom */
 
 /* message cell */
@@ -84,7 +89,7 @@ p.indent{
                                         <tr style="background-color: #eee">
                                             <td><a href="{{url('/home')}}" class=" btn btn-primary">ย้อนกลับ</a></td>
                                             <td id="message" class="redips-mark" title="You can not drop here">Table3</td>
-                                        <td><div id="d1" class="redips-drag t3 redips-clone" title="infinite cloning"> <input type="text" style="width: 31px"   class="input"     value="N"/>    </div> </td>
+                                        <td><div id="d1" class="redips-drag t3 redips-clone" title="infinite cloning"> <input type="text" style="width: 31px"   class="input cole"     value="N" />    </div> </td>
                                         <td></td>
                                         <td>
                                         <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">บันทึก</button>
@@ -686,7 +691,11 @@ function save(type) {
 		success: function (data) {
         alert("บันทึกเสร็จสมบูรณ์");
         location.reload();
-        }
+        },error: function(data) {
+
+                alert("กรอกหมายเลขตู้ซ้ำค่ะ กรุณาตรวจสอบ");
+            }
+
 	});
 		//window.open('/my/multiple-parameters-json.php?p=' + table_content, 'Mypop', 'width=350,height=260,scrollbars=yes');
 		//window.open('multiple-parameters-json.php?p=' + table_content, 'Mypop', 'width=360,height=260,scrollbars=yes');
