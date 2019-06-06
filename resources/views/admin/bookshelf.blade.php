@@ -696,6 +696,8 @@ function save(type) {
         },error: function(data) {
 
                 alert("กรอกหมายเลขตู้ซ้ำค่ะ กรุณาตรวจสอบ");
+                $("#divResults").empty().append(" ");
+                document.getElementById("sendwait").disabled = false;
             }
 
 	});
