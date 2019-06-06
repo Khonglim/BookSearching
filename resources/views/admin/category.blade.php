@@ -185,87 +185,9 @@
             </form>
             </div>
           </div>
-
-    <a href="#" class="btn btn-info"  data-toggle="modal" data-target="#myModal2">ย้ายหมวดไปชั้นอื่น</a>
-    <div id="myModal2" class="modal fade" role="dialog">
-            <div class="modal-dialog modal-lg">
-
-              <div class="modal-content">
-
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">ย้ายหมวดไปชั้นอื่น</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-inline" action="{{url('/categorych')}}" name="frmMain" method="GET" id="form-data" enctype="multipart/form-data" files="true">
-                        @csrf
-                        <select class="js-example-basic-single form-control" name="state"  OnChange="resutName(this.value);" id="cattalog" >
-                          <option value="" >--เลือกหมวด--</option>
-                          @foreach ($category as $item)
-                          <option value="{{$item->floor_id}}|{{$item->shelf}}|{{$item->call_b}}"> {{$item->call_b}}</option>
-
-                          @endforeach
-
-                        </select>
-                        <hr>
-                        <div class="form-group">
-                          <label for="floor">ชั้นเดิม:</label>
-                          <input type="number" class="form-control" id="floor_id" name="floor_id"  required>
-                        </div>
-                        <div class="form-group">
-                                <label for="floor">ตู้เดิม:</label>
-                                <input type="number" class="form-control" id="shelf" name="shelf"  required>
-                              </div>
-                              <div class="form-group">
-                                    <label for="floor">หมวด:</label>
-                                    <input type="text" class="form-control" id="call_b" name="call_b" required>
-                                </div>
-                                   <br><br>
-                                  <div class="form-group">
-                                        <label for="floor">ชั้นใหม่:</label>
-                                        <input type="number" class="form-control" id="floor_id2" name="floor_id2"  required>
-                                      </div>
-                                      <div class="form-group">
-                                              <label for="floor">ตู้ใหม่:</label>
-                                              <input type="number" class="form-control" id="shelf2" name="shelf2"  required>
-                                            </div>
-                                          <hr>
-                                  <div class="checkbox">
-                                        <label><input type="checkbox" value="1"   name="checkBox"  id="checkBox">กรณีย้ายทั้งตู้</label>
-                                      </div>
-                                      <br> <br>
-                                      <div class="form-group">
-                                        <label for="floor">ชั้นเดิม:</label>
-                                        <input type="number" class="form-control" id="floor_id3" name="floor_id3"  required  disabled>
-                                      </div>
-                                      <div class="form-group">
-                                              <label for="floor">ตู้เดิม:</label>
-                                              <input type="number" class="form-control" id="shelf3" name="shelf3"   required   disabled>
-                                        </div>
-
-                                      <br><br>
-                                      <div class="form-group">
-                                        <label for="floor">ชั้นใหม่:</label>
-                                        <input type="number" class="form-control" id="floor_id4" name="floor_id4" required  disabled>
-                                      </div>
-                                      <div class="form-group">
-                                              <label for="floor">ตู้ใหม่:</label>
-                                              <input type="number" class="form-control" id="shelf4" name="shelf4"  required   disabled>
-                                        </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-success">บันทึก</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                </div>
-              </div>
-            </form>
-            </div>
-          </div>
-
-    </div>
-
-
-
+   <a onclick="event.preventDefault();changeShelfForm();" href="#" class="btn btn-info" data-toggle="modal"> <span>ย้ายหมวดไปชั้นอื่น</span></a>
+   @include('partials.change_shelf')
+</div>
       <div class="box-body">
         <div class="box-body table-responsive no-padding">
             <table id="category" class=" table table-hover table-striped">
@@ -300,7 +222,9 @@
   </footer>
   <div class="control-sidebar-bg"></div>
 </div>
-<script src="{{ asset('asset/bower_components/jquery/dist/jquery.min.js') }}"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="{{ asset('asset/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('asset/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('asset/bower_components/fastclick/lib/fastclick.js') }}"></script>
@@ -311,6 +235,7 @@
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.js') }}"></script>
 <script src="{{ asset('asset/easyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+<script type="text/javascript" src="{{asset('js/book.js')}}"></script>
 <script>
     $('#category').DataTable( {
 
@@ -343,91 +268,6 @@
     </script>
 
 
-<script language="JavaScript">
-      function resutName(strCusName)
-            {
-                        frmMain.floor_id.value = strCusName.split("|")[0];
-                        frmMain.shelf.value = strCusName.split("|")[1];
-                        frmMain.call_b.value = strCusName.split("|")[2];
-
-
-            }
-</script>
-
-<script type="text/javascript">
-    $(function () {
-        $("#checkBox").click(function () {
-            if ($(this).is(":checked")) {
-                $("#shelf2").attr("disabled", "disabled");
-                $("#shelf2").val(" ");
-
-                $("#floor_id2").attr("disabled", "disabled");
-                $("#floor_id2").val(" ");
-
-                $("#call_b").attr("disabled", "disabled");
-                $("#call_b").val(" ");
-
-
-                $("#shelf").attr("disabled", "disabled");
-                $("#shelf").val(" ");
-
-                $("#floor_id").attr("disabled", "disabled");
-                $("#floor_id").val(" ");
-
-
-
-                $("#cattalog").attr("disabled", "disabled");
-                $("#cattalog").val(" ");
-
-
-
-                $("#shelf3").removeAttr("disabled");
-                $("#shelf3").focus();
-
-                $("#floor_id3").removeAttr("disabled");
-                $("#floor_id3").focus();
-
-                $("#shelf4").removeAttr("disabled");
-                $("#shelf4").focus();
-
-                $("#floor_id4").removeAttr("disabled");
-                $("#floor_id4").focus();
-            } else {
-                $("#shelf2").removeAttr("disabled");
-                $("#shelf2").focus();
-
-                $("#floor_id2").removeAttr("disabled");
-                $("#floor_id2").focus();
-
-                $("#call_b").removeAttr("disabled");
-                $("#call_b").focus();
-
-                $("#shelf").removeAttr("disabled");
-                $("#shelf").focus();
-
-                $("#floor_id").removeAttr("disabled");
-                $("#floor_id").focus();
-
-                $("#cattalog").removeAttr("disabled");
-                $("#cattalog").focus();
-
-                $("#floor_id3").attr("disabled", "disabled");
-                $("#floor_id3").val(" ");
-
-                $("#shelf3").attr("disabled", "disabled");
-                $("#shelf3").val(" ");
-
-                $("#floor_id4").attr("disabled", "disabled");
-                $("#floor_id4").val(" ");
-
-                $("#shelf4").attr("disabled", "disabled");
-                $("#shelf4").val(" ");
-
-
-            }
-        });
-    });
-</script>
 
 
 

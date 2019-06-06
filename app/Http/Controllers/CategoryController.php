@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -119,19 +120,56 @@ class CategoryController extends Controller
     public function destroych(Request $request)
     {
 
+
+
            if($request->checkBox == 1){
+           $countshelf = DB::table('bookshelf')->where('floor', $request->floor_id4)->where('id_shelf', $request->shelf4)->count();
+
+           if( $countshelf >0){
 
             DB::table('location_book')->where('floor_id', $request->floor_id3)
             ->where('shelf', $request->shelf3)
             ->update(['floor_id' => $request->floor_id4 ,  'shelf' => $request->shelf4]);
-            return redirect('category');
-           }else{
+            return response()->json(['error'    => false,], 200);
 
-            DB::table('location_book')->where('floor_id', $request->floor_id)
-            ->where('shelf', $request->shelf)
-            ->where('call_b', $request->call_b)
-            ->update(['floor_id' => $request->floor_id2 ,  'shelf' => $request->shelf2]);
-            return redirect('category');
+           }
+
+           else
+
+           {
+            $dataerror =[ 'flash' => 'ไม่สามารถย้ายหมวดไปตู้นี้ได้เนื่องจากไม่มีอยู่ในระบบกรุณาเพิ่มตู้! '  ];
+            return response()->json([
+                'error'    => true,
+                'messages' => $dataerror,
+            ], 422);
+
+           }
+
+           }
+           else
+           {
+             $countshelf2 = DB::table('bookshelf')->where('floor', $request->floor_id2)->where('id_shelf', $request->shelf2)->count();
+             if( $countshelf2 >0){
+
+                DB::table('location_book')->where('floor_id', $request->floor_id)
+                ->where('shelf', $request->shelf)
+                ->where('call_b', $request->call_b)
+                ->update(['floor_id' => $request->floor_id2 ,  'shelf' => $request->shelf2]);
+                return response()->json(['error'    => false,], 200);
+             }
+              else {
+                $dataerror =[ 'flash' => 'ไม่สามารถย้ายหมวดไปตู้นี้ได้เนื่องจากไม่มีอยู่ในระบบกรุณาเพิ่มตู้! '  ];
+                return response()->json([
+                    'error'    => true,
+                    'messages' => $dataerror,
+                ], 422);
+
+              }
+
+
+
+
+
 
 
            }
