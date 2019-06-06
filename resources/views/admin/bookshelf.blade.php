@@ -103,6 +103,7 @@ p.indent{
                                                     <div class="modal-body">
 
                                                       <p>ต้องการบันทึก.</p>
+                                                      <div id="divResults"></div>
                                                     </div>
                                                     <div class="modal-footer">
                                                       <input type="button" value="ใช่" class="btn btn-success" onclick="save('json')"  id="sendwait" />
@@ -661,7 +662,8 @@ function setMode(radioButton) {
 
 // show prepared content for saving
 function save(type) {
-    $("#sendwait").html("ระบบกำลังอัพเดทโปรดรอสักครู่.....");
+    document.getElementById("sendwait").disabled = true;
+    $("#divResults").empty().append("โปรดรอสักครู่ระบบกำลังทำการบันทึกค่ะ");
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

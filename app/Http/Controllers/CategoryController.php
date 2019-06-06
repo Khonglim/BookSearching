@@ -122,7 +122,21 @@ class CategoryController extends Controller
 
 
 
+
            if($request->checkBox == 1){
+
+            if( $request->floor_id4 == '' ||  $request->shelf4 == '' || $request->floor_id3 == ''|| $request->shelf3 == '' ){
+                $dataerror =[ 'flash' => 'กรุณากรอกให้ครบค่ะ'  ];
+            return response()->json([
+                'error'    => true,
+                'messages' => $dataerror,
+            ], 422);
+
+            }
+
+
+
+
            $countshelf = DB::table('bookshelf')->where('floor', $request->floor_id4)->where('id_shelf', $request->shelf4)->count();
 
            if( $countshelf >0){
@@ -148,6 +162,17 @@ class CategoryController extends Controller
            }
            else
            {
+
+
+            if( $request->floor_id2 == '' ||  $request->floor_id == '' || $request->shelf == ''|| $request->call_b == '' || $request->shelf2 == '' ){
+                $dataerror =[ 'flash' => 'กรุณากรอกให้ครบค่ะ'  ];
+            return response()->json([
+                'error'    => true,
+                'messages' => $dataerror,
+            ], 422);
+
+        }
+
              $countshelf2 = DB::table('bookshelf')->where('floor', $request->floor_id2)->where('id_shelf', $request->shelf2)->count();
              if( $countshelf2 >0){
 

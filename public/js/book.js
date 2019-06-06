@@ -17,6 +17,7 @@ $(document).ready(function() {
             success: function(data) {
                 $('#frmAddTask').trigger("reset");
                 $("#frmAddTask .close").click();
+                alert("ลบตู้สำเร็จ!!");
                 window.location.reload();
             },
             error: function(data) {
@@ -29,39 +30,7 @@ $(document).ready(function() {
             }
         });
     });
-
-
-
-
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function addTaskForm() {
     $(document).ready(function() {
@@ -70,13 +39,7 @@ function addTaskForm() {
     });
 }
 
-
-
-
-
 $(document).ready(function() {
-
-
     $("#btn-change").click(function() {
         $.ajaxSetup({
             headers: {
@@ -111,7 +74,11 @@ $(document).ready(function() {
             success: function(data) {
                 $('#frmMain').trigger("reset");
                 $("#frmMain .close").click();
-                window.location.reload();
+                $("#divErrorMessages").empty();
+                $("#showsseces").show();
+            /* clear old results, then display the new results */
+            $("#divResults").empty().append("บันทึกสำเร็จ");
+            window.setTimeout(function(){location.reload()},3000)
             },
             error: function(data) {
                 var errors = $.parseJSON(data.responseText);
@@ -123,11 +90,6 @@ $(document).ready(function() {
             }
         });
     });
-
-
-
-
-
 });
 
 
@@ -137,7 +99,6 @@ function changeShelfForm() {
         $('#changeShelfModal').modal('show');
     });
 }
-
 
 
 $(function () {

@@ -136,6 +136,12 @@
           {!! session('flash_message') !!}
         </div>
       @endif
+
+      <div class="alert alert-success d-flex align-items-center" id="showsseces">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <div id="divResults"></div>
+        </div>
+
     </section>
     <section class="content container-fluid">
    <div class="box box-info">
@@ -263,6 +269,7 @@
     });
 
     $(document).ready(function() {
+        $("#showsseces").hide();
     $('.js-example-basic-single').select2();
 });
     </script>
