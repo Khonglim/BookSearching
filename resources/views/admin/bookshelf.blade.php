@@ -5,12 +5,8 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
 		<title>ปรับตำแหน่งตู้หนังสือ</title>
 		<style>
-
-
-
 
 /* table */
 div#redips-drag table {
@@ -104,7 +100,7 @@ p.indent{
                                                       <p>ต้องการบันทึก.</p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                      <input type="button" value="ใช่" class="btn btn-success" onclick="save('json')" />
+                                                      <input type="button" value="ใช่" class="btn btn-success" onclick="save('json')"  id="sendwait" />
                                                       <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
                                                     </div>
                                                   </div>
@@ -660,6 +656,7 @@ function setMode(radioButton) {
 
 // show prepared content for saving
 function save(type) {
+    $("#sendwait").html("ระบบกำลังอัพเดทโปรดรอสักครู่.....");
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -689,15 +686,7 @@ function save(type) {
 		success: function (data) {
         alert("บันทึกเสร็จสมบูรณ์");
         location.reload();
-        },
-        error: function(data) {
-                var errors = $.parseJSON(data.responseText);
-                $('#add-task-errors').html('');
-                $.each(errors.messages, function(key, value) {
-                    $('#add-task-errors').append('<li>' + value + '</li>');
-                });
-                $("#add-error-bag").show();
-            }
+        }
 	});
 		//window.open('/my/multiple-parameters-json.php?p=' + table_content, 'Mypop', 'width=350,height=260,scrollbars=yes');
 		//window.open('multiple-parameters-json.php?p=' + table_content, 'Mypop', 'width=360,height=260,scrollbars=yes');
@@ -780,34 +769,6 @@ function mySaveContent (tbl, type) {
     return query;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // add onload event listener
 if (window.addEventListener) {
 	window.addEventListener('load', redipsInit, false);
@@ -815,6 +776,7 @@ if (window.addEventListener) {
 else if (window.attachEvent) {
 	window.attachEvent('onload', redipsInit);
 }
+        </script>
 
 
 
@@ -829,6 +791,8 @@ else if (window.attachEvent) {
 
 
 
-		</script>
-	</body>
+
+
+    </body>
+
 </html>
