@@ -72,7 +72,7 @@
         </h1>
       </section>
       <section class="content">
-                      <form action="/search" method="POST" role="search">
+                      <form action="{{url('/search')}}" method="POST" role="search">
                         @csrf
                         <div class="input-group">
                             <input type="text" class="form-control" name="q"   placeholder="ค้นหาหนังสือ"> <span class="input-group-btn">

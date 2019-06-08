@@ -82,7 +82,7 @@ Route::any ( '/search', function () {
 
 
     if (count ( $pagination ) > 0){
-    return view ( 'welcome', )->withDetails( $pagination )->withQuery ( $q );
+    return view ( 'welcome' )->withDetails( $pagination )->withQuery($q);
    }
 
 }
