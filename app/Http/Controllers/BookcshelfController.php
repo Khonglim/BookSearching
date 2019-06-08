@@ -109,17 +109,18 @@ class BookcshelfController extends Controller
     }
 
 
-public function locationshow($id,$namebook,$language){
-            $cell=$id;
-            $namebooks = $namebook;
-            $languages =  $language;
+public function locationshow(Request $request){
+            $cell= $request->callno;
+            $namebooks = $request->best_title;
+            $languages =  $request->language_code;
+            $querys    = $request->query11;
 
-            $floor1  =  DB::table('location_book')->where('call_b',$id)->where('language',$languages)->get();
+            $floor1  =  DB::table('location_book')->where('call_b',$request->callno)->where('language',$request->language_code)->get();
 
            if(count($floor1) >0 ){
             $bookshelf = DB::table('bookshelf')->where('floor','=',$floor1[0]->floor_id)->get();
             $floor = $floor1[0]->floor_id;
-            $locationbook = DB::table('location_book')->where('language',$languages)->get();
+            $locationbook = DB::table('location_book')->where('language',$request->language_code)->get();
             $data = array('bookshelf' =>  $bookshelf,
                             'cell'    =>  $cell,
                        'locationbook' =>  $locationbook,
@@ -133,7 +134,10 @@ public function locationshow($id,$namebook,$language){
 
            else
            {
-                return view('nolocation');
+
+            $data = array('querys' =>  $querys);
+
+                return view('nolocation', $data);
            }
 }
 

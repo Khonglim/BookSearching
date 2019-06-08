@@ -54,7 +54,7 @@
         </div>
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
-          <li class="active"><a href="{{url('/')}}"> <i class=" fa fa-folder-open"></i> รายการหนังสือทั้งหมด<span class="sr-only">(current)</span></a></li>
+          <li ><a href="{{url('/')}}"> <i class=" fa fa-folder-open"></i> รายการหนังสือทั้งหมด<span class="sr-only">(current)</span></a></li>
 
           </ul>
 
@@ -109,7 +109,19 @@
 
 
                                 </span>
-                                <span class="info-box-text"><b> ดูตำแหน่งตู้:</b>   <a href="/locationShow/{{$books->callno}}/{{$books->best_title}}/{{$books->language_code}}" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i></a></span>
+
+                                    <form  action="{{url('/locationShow')}}"  method="POST" id="form-data" >
+                                        @csrf
+                                                <input type="hidden" name="callno" value="{{$books->callno}}">
+                                                <input type="hidden" name="best_title" value="{{$books->best_title}}">
+                                                <input type="hidden" name="language_code" value="{{$books->language_code}}">
+
+                                                <button type="submit" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i> คลิก ดูต่ำแหน่ง</button>
+                                    </form>
+
+
+
+
                                 <span class="info-box-text"><b> สถานะ:</b>
                                 @if($books->item_status_code == '-')
 
@@ -164,7 +176,16 @@
 
 
                             </span>
-                        <span class="info-box-text"><b> ดูตำแหน่งตู้:</b>   <a href="/locationShow/{{$books->callno}}/{{$books->best_title}}/{{$books->language_code}}" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i></a></span>
+
+
+                        <form  action="{{url('/locationShow')}}"  method="POST" id="form-data" >
+                            @csrf
+                                    <input type="hidden" name="callno" value="{{$books->callno}}">
+                                    <input type="hidden" name="best_title" value="{{$books->best_title}}">
+                                    <input type="hidden" name="language_code" value="{{$books->language_code}}">
+                                    <input type="hidden" name="query11" value="{{ $query }}">
+                                    <button type="submit" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i> คลิก</button>
+                        </form>
                              <span class="info-box-text"><b> สถานะ:</b>
                                 @if($books->item_status_code == '-')
 

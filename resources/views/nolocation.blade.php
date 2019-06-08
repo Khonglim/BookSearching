@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
   <title>Book</title>
   <meta charset="utf-8">
@@ -22,9 +22,18 @@
   <div class="page-header">
     <h1>ขออภัยไม่พบข้อมูลในระบบ </h1>
   </div>
-  <a href="{{url('/')}}"  class="btn btn-danger">ย้อนกลับ</a>
 
 
+<form action="{{url('/search')}}" method="POST" role="search">
+    @csrf
+    <div class="input-group">
+        <input type="hidden" class="form-control" name="q"  value="{{$querys}}">
+            <button type="submit" class="btn btn-danger">
+                ย้อนกลับ
+            </button>
+
+    </div>
+</form>
 
 </div>
 
