@@ -129,12 +129,24 @@ p.indent{
 
                         <img src="{{asset('images/location2.gif')}}"  style=" position: relative;"> </p>
 
-                        <form action="{{url('/search')}}" method="PUT" >
+
+
+                        @if( $querys != '' )
+                        <form action="{{url('/search')}}" method="PUT" role="search">
 
                                 <input type="hidden" class="form-control" name="q"  value="{{$querys}}">
-                                <center><input type="submit" value="ย้อนกลับ" class="btn btn-primary"></center>
-                           
+                                    <button type="submit" class="btn btn-danger">
+                                        ย้อนกลับ
+                                    </button>
+
+                         
                         </form>
+                        @else
+                        <a href="{{url('/')}}"  class="btn btn-danger">ย้อนกลับ</a>
+
+
+
+                        @endif
                   </div>
                   <div class="scroll">
 		<div  class="map" id="MapBook" >

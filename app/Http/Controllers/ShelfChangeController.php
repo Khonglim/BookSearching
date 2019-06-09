@@ -29,11 +29,7 @@ class ShelfChangeController extends Controller
 
 
 
-        $data = array('code'=> $code
-
-
-
-    );
+        $data = array('code'=> $code);
         return view('admin.home' ,$data);
     }
 
@@ -57,7 +53,14 @@ class ShelfChangeController extends Controller
      */
     public function store(Request $request)
     {
+        $count = DB::table('floor')->where('floor_id', '=',$request->floor)->count();
+       if($count > 0){
+        Session::flash('flash_message_error','ไม่สามารถบันทึกได้มีชั้นหมายเลขนี้แล้ว !! ');
+        return redirect('home');
+       }
+
         DB::insert('insert into floor (floor_id) values ("'.$request->floor.'")');
+
         Session::flash('flash_message','บันทึกข้อมูลสำเร็จ!! ');
         return redirect('home');
     }
