@@ -126,7 +126,8 @@ public function locationshow(Request $request){
                        'locationbook' =>  $locationbook,
                          'floor'      =>  $floor,
                       'namebooks'     =>  $namebooks,
-                         'floor1'     =>  $floor1
+                         'floor1'     =>  $floor1,
+                         'querys' =>  $querys
 
         );
                  return view('locationShow', $data);

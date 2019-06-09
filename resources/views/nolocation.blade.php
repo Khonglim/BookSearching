@@ -23,9 +23,8 @@
     <h1>ขออภัยไม่พบข้อมูลในระบบ </h1>
   </div>
 
-
-<form action="{{url('/search')}}" method="POST" role="search">
-    @csrf
+@if( $querys != '' )
+<form action="{{url('/search')}}" method="PUT" role="search">
     <div class="input-group">
         <input type="hidden" class="form-control" name="q"  value="{{$querys}}">
             <button type="submit" class="btn btn-danger">
@@ -34,6 +33,13 @@
 
     </div>
 </form>
+@else
+<a href="{{url('/')}}"  class="btn btn-danger">ย้อนกลับ</a>
+
+
+
+@endif
+
 
 </div>
 

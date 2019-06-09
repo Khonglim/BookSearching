@@ -115,6 +115,7 @@ p.indent{
 	<body class="bg-info">
         <div class="container">
             <div class="jumbotron  myJumbotron text-center">
+
                     <p>ชื่อหนังสือ: {{$namebooks}}</p>
                     <hr>
                     <p>ชั้น: {{$floor}} อาคาร นวมินทร์ </p>
@@ -127,7 +128,13 @@ p.indent{
 
 
                         <img src="{{asset('images/location2.gif')}}"  style=" position: relative;"> </p>
-            <a href="{{url('/')}}"    class="btn btn-info" >   ย้อนกลับ         </a>
+
+                        <form action="{{url('/search')}}" method="PUT" >
+
+                                <input type="hidden" class="form-control" name="q"  value="{{$querys}}">
+                                <center><input type="submit" value="ย้อนกลับ" class="btn btn-primary"></center>
+                           
+                        </form>
                   </div>
                   <div class="scroll">
 		<div  class="map" id="MapBook" >

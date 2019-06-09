@@ -72,8 +72,8 @@
         </h1>
       </section>
       <section class="content">
-                      <form action="{{url('/search')}}" method="POST" role="search">
-                        @csrf
+                      <form action="{{url('/search')}}" method="PUT" role="search">
+
                         <div class="input-group">
                             <input type="text" class="form-control" name="q"   placeholder="ค้นหาหนังสือ"> <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default">
@@ -110,13 +110,13 @@
 
                                 </span>
 
-                                    <form  action="{{url('/locationShow')}}"  method="POST" id="form-data" >
-                                        @csrf
+                                    <form  action="{{url('/locationShow')}}"  method="PUT" id="form-data" >
+
                                                 <input type="hidden" name="callno" value="{{$books->callno}}">
                                                 <input type="hidden" name="best_title" value="{{$books->best_title}}">
                                                 <input type="hidden" name="language_code" value="{{$books->language_code}}">
 
-                                                <button type="submit" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i> คลิก ดูต่ำแหน่ง</button>
+                                                <button type="submit" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i> คลิก ดูตำแหน่ง</button>
                                     </form>
 
 
@@ -178,13 +178,13 @@
                             </span>
 
 
-                        <form  action="{{url('/locationShow')}}"  method="POST" id="form-data" >
-                            @csrf
+                        <form  action="{{url('/locationShow')}}"  method="PUT" id="form-data" >
+
                                     <input type="hidden" name="callno" value="{{$books->callno}}">
                                     <input type="hidden" name="best_title" value="{{$books->best_title}}">
                                     <input type="hidden" name="language_code" value="{{$books->language_code}}">
                                     <input type="hidden" name="query11" value="{{ $query }}">
-                                    <button type="submit" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i> คลิก</button>
+                                    <button type="submit" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i> คลิก ดูตำแหน่ง</button>
                         </form>
                              <span class="info-box-text"><b> สถานะ:</b>
                                 @if($books->item_status_code == '-')
