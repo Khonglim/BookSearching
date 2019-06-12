@@ -95,19 +95,7 @@
 
                                 <div class="info-box-content">
                                 <span class="info-box-text"><b> ชื่อหนังสือ:  </b>{{ $books->best_title }} </span>
-                                <span class="info-box-text"><b> ผู้แต่ง:  </b>
-                                 @if($books->best_author == '')
-
-                                    ไม่ทราบผู้แต่ง
-                                 @else
-
-                                 {{$books->best_author}}
-
-                                 @endif
-
-
-
-
+                                <span class="info-box-text"><b> ผู้แต่ง:  </b>{{$books->best_author}}
                                 </span>
 
                                     <form  action="{{url('/locationShow')}}"  method="PUT" id="form-data" >
@@ -161,20 +149,7 @@
 
                             <div class="info-box-content">
                             <span class="info-box-text"><b> ชื่อหนังสือ:  </b>{{ $books->best_title }} </span>
-                             <span class="info-box-text"><b> ผู้แต่ง:  </b>
-                                    @if($books->best_author == '')
-
-                                       ไม่ทราบผู้แต่ง
-                                    @else
-
-                                    {{$books->best_author}}
-
-                                    @endif
-
-
-
-
-
+                             <span class="info-box-text"><b> ผู้แต่ง:  </b>{{$books->best_author}}
                             </span>
 
 

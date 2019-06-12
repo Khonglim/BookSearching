@@ -60,7 +60,7 @@ Route::get('/', function () {
 //}
 
 
-$pagination = Bookapi::simplePaginate(16);
+$pagination = Bookapi::orderBy('best_title', 'asc')->simplePaginate(16);
 $data  = array('pagination' =>$pagination , );
 
 
@@ -72,10 +72,10 @@ $data  = array('pagination' =>$pagination , );
 Route::any ( '/search', function () {
     $q = Input::get ( 'q' );
     if($q != ""){
-    $pagination = Bookapi::where ( 'best_title', 'LIKE', '%' . $q . '%' )->orWhere ( 'best_author', 'LIKE', '%' . $q . '%' )->simplePaginate(16)->setPath ( '' )
-
-
-    ;
+    $pagination = Bookapi::orderBy('best_title', 'asc')->orwhere( 'best_title', 'LIKE', '%'.$q.'%' )
+    ->orWhere('best_author', 'LIKE', '%'.$q.'%' )
+    ->simplePaginate(16)
+    ->setPath ( '' );
   $pagination->appends( array (
         'q' => Input::get ( 'q' )
       ) );
@@ -124,7 +124,7 @@ Route::get('index', 'CodewoldController@index');
 
 
 Route::post('bookshelf','BookcshelfController@ajaxRequestPost');
-Route::get('editBook/{id}', 'BookcshelfController@index');
+Route::get('editBook/{id}', 'BookcshelfController@index')->middleware('auth');
 
 
 Route::post('allposts', 'PostController@postdata' )->name('dataProcessing');
@@ -139,7 +139,7 @@ Route::post('bookdelete', 'PostController@bookdeletes' );
 
 Route::get('/updatedata', function () {
     return view('admin.updatebook');
- });
+ })->middleware('auth');
 
  Route::get('/updatedataapi', 'HomeController@updatebookapi');
 
