@@ -244,10 +244,10 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Anything you want
+        KMUTNB
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2018 <a href="#">BookSearching</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2018 <a href="#">Student project</a>.</strong>
   </footer>
 
 

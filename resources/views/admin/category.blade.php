@@ -199,9 +199,9 @@
             <table id="category" class=" table table-hover table-striped">
                     <thead>
                     <tr>
-                      <th>ไอดี</th>
+
                       <th>ชั้น</th>
-                      <th>ตู้</th>
+                      <th>ตู้หนังสือ</th>
                       <th>หมวด</th>
                       <th>เพิ่มเติม</th>
                     </tr>
@@ -222,9 +222,9 @@
   </div>
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      Anything you want
+     KMUTNB
     </div>
-    <strong>Copyright &copy; 2018 <a href="#">BookSearching</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2018 <a href="#">Student project</a>.</strong>
   </footer>
   <div class="control-sidebar-bg"></div>
 </div>
@@ -254,7 +254,7 @@
             "data":{"_token":"<?= csrf_token() ?>"}
         },
         "columns":[
-            {"data":"id"},
+
             {"data":"floor_id"},
             {"data":"shelf"},
             {"data":"call_b"},

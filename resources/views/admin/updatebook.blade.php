@@ -104,9 +104,9 @@
   </div>
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      Anything you want
+        KMUTNB
     </div>
-    <strong>Copyright &copy; 2018 <a href="#">BookSearching</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2018 <a href="#">Student project</a>.</strong>
   </footer>
   <div class="control-sidebar-bg"></div>
 </div>

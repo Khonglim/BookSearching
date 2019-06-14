@@ -207,7 +207,7 @@
       <div class="pull-right hidden-xs">
         <b>Version</b> 1.0.0
       </div>
-      <strong>Copyright &copy; 2018 <a href="https://adminlte.io">โปรเจกนักศึกษา</a>.</strong> KMUTNB
+      <strong>Copyright &copy; 2018 <a href="">Student project</a>.</strong> KMUTNB
     </div>
     <!-- /.container -->
   </footer>
