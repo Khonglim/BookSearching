@@ -98,6 +98,15 @@ class ShelfChangeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $count = DB::table('bookshelf')->where('floor', '=' ,$request->floor_id)->count();
+
+        if($count > 0 ){
+
+            Session::flash('flash_message_error','ไม่สามารถแก้ไขชั้นได้  เนี่องจากมีตู้หนังสืออยู้ในชั้น !! ');
+
+            return redirect('home');
+
+        }
         DB::table('floor')
         ->where('id', $id)
         ->update(['floor_id' => $request->floor]);

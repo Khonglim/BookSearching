@@ -53,16 +53,9 @@ class HomeController extends Controller
         $urleng = "http://202.28.17.35/api4lib/api/index.php/GetListOfItmesFromCallNoRange/%7CaA/%7CaZ/bcm/tha";
 
         curl_setopt($cheng, CURLOPT_URL, $urleng);
-        curl_setopt($cheng, CURLOPT_RETURNTRANSFER, 1);
-        $outputeng = json_decode(curl_exec($cheng));
+        curl_setopt($cheng, CURLOPT_RETURNTRANSFER, 1);// คืนค่าการถ่ายโอนเป็นสตริง
+        $outputeng = json_decode(curl_exec($cheng));// $ output มีสตริงเอาต์พุต
         curl_close($cheng);
-
-
-
-
-
-
-
 
        $book = $output->ListOfItemsFromCallNoRange;
        $bookeng = $outputeng->ListOfItemsFromCallNoRange;
@@ -76,11 +69,11 @@ class HomeController extends Controller
            $bookapi->item_record_id = $r->item_record_id ;
            $bookapi->best_title = $r->best_title ;
            $bookapi->best_author = $r->best_author ;
-            $bookapi->item_status_code = $r->item_status_code ;
-            $bookapi->use3_count = $r->use3_count ;
-            $bookapi->copy_use_count = $r->copy_use_count ;
-            $bookapi->due_gmt = $r->due_gmt ;
-            $bookapi->language_code = $r->language_code ;
+           $bookapi->item_status_code = $r->item_status_code ;
+           $bookapi->use3_count = $r->use3_count ;
+           $bookapi->copy_use_count = $r->copy_use_count ;
+           $bookapi->due_gmt = $r->due_gmt ;
+           $bookapi->language_code = $r->language_code ;
 
             $e=explode("|",$r->callno);
             $cut1=substr($e[1],1);
@@ -88,7 +81,7 @@ class HomeController extends Controller
             $bookapi->callno =  $cut1;
             $bookapi->group_code = $r->group_code ;
             $bookapi->class = $r->class ;
-          $bookapi->class_x = $r->class_x ;
+             $bookapi->class_x = $r->class_x ;
 
 
 

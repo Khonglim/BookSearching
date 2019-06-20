@@ -183,6 +183,7 @@
 
                                                         <div class="form-group">
                                                           <label for="floor">ชั้น</label>
+                                                          <input type="hidden" name="floor_id" value="{{$codewolds->floor_id}}">
                                                           <input type="number" class="form-control" id="floor" name="floor" placeholder="1" required>
                                                         </div>
                                                 </div>
