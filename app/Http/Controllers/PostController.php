@@ -11,9 +11,9 @@ class PostController extends Controller
 {
     public function postdata()
     {
-        $category= Category::all();
+        $category= Category::orderBy('call_b', 'asc')->where('floor_id','!=','ยังไม่ได้ระบุตำแหน่งชั้น')->where('shelf','!=','ยังไม่ได้ระบุตำแหน่งตู้');
         return datatables($category)->addColumn('action', function ($category) {
-              return '  <a href="#" data-toggle="modal" data-target="#edit'.$category->id.'" class="btn btn-warning btn-xs"><i  class="fa fa-pencil"  width="15px"></i> แก้ไข</a>
+              return '<a href="#" data-toggle="modal" data-target="#edit'.$category->id.'" class="btn btn-warning btn-xs"><i  class="fa fa-pencil"  width="15px"></i> แก้ไข</a>
               <div id="edit'.$category->id.'" class="modal fade" role="dialog">
                       <div class="modal-dialog modal-lg" >
                         <div class="modal-content">
@@ -21,7 +21,7 @@ class PostController extends Controller
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">แก้ไข</h4>
                           </div>
-                          <form action="/update/'.$category->id.'" "method"="PUT" >
+                          <form action="/update/'.$category->id.'" method="PUT" >
                           <div class="modal-body">
                           <div class="form-group">
                   <label for="exampleInputEmail1">ชั้น:</label>
@@ -33,12 +33,12 @@ class PostController extends Controller
                 </div>
                 <div class="form-group">
                 <label for="exampleInputEmail1">หมวด:</label>
-                <input type="text" class="form-control" id="call_b"  name="call_b"   placeholder="หมวด" value="'.$category->call_b.'" >
+                <input type="text" class="form-control" id="call_b"  name="call_b"   placeholder="หมวด" value="'.$category->call_b.'"   disabled>
               </div>
               <br><br>
               <div class="form-group">
                 <label for="floor">ภาษา:</label>
-                <input type="text" class="form-control" id="call_b"  name="language"   placeholder="ภาษา" value="'.$category->language.'" >
+                <input type="text" class="form-control" id="call_b"  name="language"   placeholder="ภาษา" value="'.$category->language.'" disabled>
 </div>
 
 
@@ -52,6 +52,53 @@ class PostController extends Controller
 
                       </div>
                     </div>
+
+
+
+
+
+                    <a href="#" data-toggle="modal" data-target="#add'.$category->id.'" class="btn btn-primary btn-xs"><i  class="fa fa-plus-circle"  width="15px"></i> เพิ่มหมวดมากกว่า 1 ตู้</a>
+                    <div id="add'.$category->id.'" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg" >
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">เพิ่ม</h4>
+                                </div>
+                                <form action="/categorych2" method="PUT" >
+
+                                <div class="modal-body">
+                                <div class="form-group">
+                        <label for="exampleInputEmail1">ชั้น:</label>
+                        <input type="text" class="form-control" id="floor_id"  name="floor_id" placeholder="ชั้น"  value="'.$category->floor_id.'">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">ตู้:</label>
+                        <input type="text" class="form-control" id="shelf"  name="shelf" placeholder="ตู้"   value="'.$category->shelf.'" >
+                      </div>
+                      <div class="form-group">
+                      <label for="exampleInputEmail1">หมวด:</label>
+                      <input type="text" class="form-control" id="call_b"  name="call_b"   placeholder="หมวด" value="'.$category->call_b.'"  readonly >
+                    </div>
+                    <br><br>
+                    <div class="form-group">
+                      <label for="floor">ภาษา:</label>
+                      <input type="text" class="form-control" id="call_b"  name="language"   placeholder="ภาษา" value="'.$category->language.'" readonly>
+      </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">บันทึก</button>
+                                </form>
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+
                         <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delet'.$category->id.'"><i class="fa fa-trash" width="15px"></i>ลบ</a>
                         <div id="delet'.$category->id.'" class="modal fade" role="dialog">
                         <div class="modal-dialog">
@@ -81,6 +128,80 @@ class PostController extends Controller
               ';})->toJson();
     }
 
+
+
+    public function postdata2()
+    {
+        $category= Category::orderBy('call_b', 'asc')->where('floor_id','=','ยังไม่ได้ระบุตำแหน่งชั้น')->where('shelf','=','ยังไม่ได้ระบุตำแหน่งตู้');
+        return datatables($category)->addColumn('action', function ($category) {
+              return '<a href="#" data-toggle="modal" data-target="#edit'.$category->id.'" class="btn btn-warning btn-xs"><i  class="fa fa-pencil"  width="15px"></i> แก้ไข</a>
+              <div id="edit'.$category->id.'" class="modal fade" role="dialog">
+                      <div class="modal-dialog modal-lg" >
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">แก้ไข</h4>
+                          </div>
+                          <form action="/update/'.$category->id.'" method="PUT" >
+                          <div class="modal-body">
+                          <div class="form-group">
+                  <label for="exampleInputEmail1">ชั้น:</label>
+                  <input type="text" class="form-control" id="floor_id"  name="floor_id" placeholder="ชั้น"  value="'.$category->floor_id.'">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">ตู้:</label>
+                  <input type="text" class="form-control" id="shelf"  name="shelf" placeholder="ตู้"   value="'.$category->shelf.'" >
+                </div>
+                <div class="form-group">
+                <label for="exampleInputEmail1">หมวด:</label>
+                <input type="text" class="form-control" id="call_b"  name="call_b"   placeholder="หมวด" value="'.$category->call_b.'"   disabled>
+              </div>
+              <br><br>
+              <div class="form-group">
+                <label for="floor">ภาษา:</label>
+                <input type="text" class="form-control" id="call_b"  name="language"   placeholder="ภาษา" value="'.$category->language.'" disabled>
+</div>
+
+
+                          </div>
+                          <div class="modal-footer">
+                          <button type="submit" class="btn btn-success">บันทึก</button>
+                          </form>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                        <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delet'.$category->id.'"><i class="fa fa-trash" width="15px"></i>ลบ</a>
+                        <div id="delet'.$category->id.'" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">ลบ</h4>
+                            </div>
+                            <form action="/destroy/'.$category->id.'" "method"="DELETE" >
+                            <div class="modal-body">
+
+
+                             คุณต้องการลบใช่หรือไม่
+
+
+                            </div>
+                            <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">ลบ</button>
+                            </form>
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+              ';})->toJson();
+    }
 
     public function bookdeletes(Request $request){
 

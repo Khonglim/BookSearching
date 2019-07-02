@@ -1,4 +1,4 @@
-   <!-- ลบชั้นวางหนังสือ-->
+
    <div id="changeShelfModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -20,24 +20,34 @@
                       <hr>
                       <div class="form-group">
                         <label for="floor">ชั้นเดิม:</label>
-                        <input type="number" class="form-control" id="floor_id" name="floor_id"   >
+
+
+                          <input type="text" name="floor_id" id="floor_id" class="form-control"  readonly>
                       </div>
                       <div class="form-group">
                               <label for="floor">ตู้เดิม:</label>
-                              <input type="number" class="form-control" id="shelf" name="shelf"  >
+                              <input type="number" class="form-control" id="shelf" name="shelf"  readonly>
                             </div>
                             <div class="form-group">
                                   <label for="floor">หมวด:</label>
-                                  <input type="text" class="form-control" id="call_b" name="call_b" >
+                                  <input type="text" class="form-control" id="call_b" name="call_b" readonly>
                               </div>
                                  <br><br>
                                 <div class="form-group">
                                       <label for="floor">ชั้นใหม่:</label>
-                                      <input type="number" class="form-control" id="floor_id2" name="floor_id2"  >
+
+                                      <select class="form-control" name="floor_id2" id="floor_id2" >
+                                        <option >ระบุ </option>
+                                        @foreach ( $floor as $floors )
+                                           <option value="{{$floors->floor_id}}" >{{$floors->floor_id}} </option>
+                                        @endforeach
+                                      </select>
+
+
                                     </div>
                                     <div class="form-group">
                                             <label for="floor">ตู้ใหม่:</label>
-                                            <input type="number" class="form-control" id="shelf2" name="shelf2"  >
+                                            <input type="text" class="form-control" id="shelf2" name="shelf2"  >
                                           </div>
                                         <hr>
                                 <div class="checkbox">
@@ -46,21 +56,33 @@
                                     <br> <br>
                                     <div class="form-group">
                                       <label for="floor">ชั้นเดิม:</label>
-                                      <input type="number" class="form-control" id="floor_id3" name="floor_id3"    disabled>
+                                      <select class="form-control" name="floor_id3"  id="floor_id3" disabled>
+                                        <option >ระบุ </option>
+                                        @foreach ( $floor as $floors )
+                                    <option value="{{$floors->floor_id}}" >{{$floors->floor_id}} </option>
+                                        @endforeach
+                                      </select>
+
                                     </div>
                                     <div class="form-group">
                                             <label for="floor">ตู้เดิม:</label>
-                                            <input type="number" class="form-control" id="shelf3" name="shelf3"      disabled>
+                                            <input type="text" class="form-control" id="shelf3" name="shelf3"      disabled>
                                       </div>
 
                                     <br><br>
                                     <div class="form-group">
                                       <label for="floor">ชั้นใหม่:</label>
-                                      <input type="number" class="form-control" id="floor_id4" name="floor_id4"   disabled>
+                                      <select class="form-control" name="floor_id4"  id="floor_id4" disabled>
+                                        <option >ระบุ </option>
+                                        @foreach ( $floor as $floors )
+                                    <option value="{{$floors->floor_id}}" >{{$floors->floor_id}} </option>
+                                        @endforeach
+                                      </select>
+
                                     </div>
                                     <div class="form-group">
                                             <label for="floor">ตู้ใหม่:</label>
-                                            <input type="number" class="form-control" id="shelf4" name="shelf4"     disabled>
+                                            <input type="text" class="form-control" id="shelf4" name="shelf4"     disabled>
                                       </div>
                                       <div id="add-error-bag2" class="alert alert-danger">
                                             <ul id="add-task-errors2">

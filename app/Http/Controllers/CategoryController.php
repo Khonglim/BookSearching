@@ -22,7 +22,11 @@ class CategoryController extends Controller
     public function index()
     {
         $category= Category::all();
-         $data = array('category' => $category  );
+         $floor = DB::table('floor')->get();
+         $data = array('category' => $category ,
+                        'floor' => $floor
+        );
+
 
         return view("admin.category",$data);
     }
@@ -43,9 +47,8 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store2(Request $request)
     {
-
         $category  =   new Category;
         $category->floor_id =  $request->floor_id;
         $category->shelf =  $request->shelf;
@@ -91,7 +94,7 @@ class CategoryController extends Controller
     {
         DB::table('location_book')
         ->where('id', $id)
-        ->update(['floor_id' => $request->floor_id, 'shelf' => $request->shelf,'call_b' => $request->call_b,'language'=>$request->language]);
+        ->update(['floor_id' => $request->floor_id, 'shelf' => $request->shelf]);
         Session::flash('flash_message','แก้ไขข้อมูลสำเร็จ!! ');
         return redirect('category');
     }
@@ -133,31 +136,39 @@ class CategoryController extends Controller
             ], 422);
 
             }
+            $countlocation_book = DB::table('location_book')->where('floor_id', $request->floor_id3)->where('shelf', $request->shelf3)->count();
+              if($countlocation_book >0   ){
+
+                $countshelf = DB::table('bookshelf')->where('floor', $request->floor_id4)->where('id_shelf', $request->shelf4)->count();
+
+                if( $countshelf >0){
+
+                 DB::table('location_book')->where('floor_id', $request->floor_id3)
+                 ->where('shelf', $request->shelf3)
+                 ->update(['floor_id' => $request->floor_id4 ,  'shelf' => $request->shelf4]);
+                 return response()->json(['error'    => false,], 200);
+
+                } else{
+                 $dataerror =[ 'flash' => 'ไม่สามารถย้ายหมวดไปตู้นี้ได้เนื่องจากไม่มีอยู่ในระบบกรุณาเพิ่มตู้! '  ];
+                 return response()->json([
+                     'error'    => true,
+                     'messages' => $dataerror,
+                 ], 422);
+
+                }
 
 
 
+              }else{
+                $dataerror =[ 'flash' => 'ไม่สามารถย้ายหมวดไปตู้นี้ได้เนื่องจากไม่พบข้อมูลหมวดในชั้นเดิมค่ะ'  ];
+                return response()->json([
+                    'error'    => true,
+                    'messages' => $dataerror,
+                ], 422);
+              }
 
-           $countshelf = DB::table('bookshelf')->where('floor', $request->floor_id4)->where('id_shelf', $request->shelf4)->count();
 
-           if( $countshelf >0){
 
-            DB::table('location_book')->where('floor_id', $request->floor_id3)
-            ->where('shelf', $request->shelf3)
-            ->update(['floor_id' => $request->floor_id4 ,  'shelf' => $request->shelf4]);
-            return response()->json(['error'    => false,], 200);
-
-           }
-
-           else
-
-           {
-            $dataerror =[ 'flash' => 'ไม่สามารถย้ายหมวดไปตู้นี้ได้เนื่องจากไม่มีอยู่ในระบบกรุณาเพิ่มตู้! '  ];
-            return response()->json([
-                'error'    => true,
-                'messages' => $dataerror,
-            ], 422);
-
-           }
 
            }
            else

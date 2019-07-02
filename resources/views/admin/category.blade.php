@@ -47,13 +47,6 @@
         overflow: hidden;
     }
     </style>
-
-
-
-
-
-
-
 </head>
 <body class="hold-transition skin-purple sidebar-mini" >
         <div id="overlay"></div>
@@ -83,7 +76,6 @@
 
                       </li>
                       <!-- Menu Body -->
-
                       <!-- Menu Footer-->
                       <li class="user-footer">
                         <div class="pull-right">
@@ -99,12 +91,8 @@
                       </li>
                     </ul>
                   </li>
-
                 </ul>
               </div>
-
-
-
         </nav>
       </header>
   <!-- Left side column. contains the logo and sidebar -->
@@ -144,75 +132,56 @@
 
     </section>
     <section class="content container-fluid">
+
+        <p> <a onclick="event.preventDefault();changeShelfForm();" href="#" class="btn btn-info" data-toggle="modal"> <span>ย้ายหมวดไปชั้นอื่น</span></a>
+            @include('partials.change_shelf')  </p>
+
+
    <div class="box box-info">
     <div class="box-header with-border">
-    <a href="#" class="btn btn-success"  data-toggle="modal" data-target="#myModal">เพิ่มหมวด</a>
-    <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog modal-lg">
-
-              <div class="modal-content">
-
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">เพิ่มหมวด</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-inline" action="{{url('/category')}}"  method="POST" id="form-data" enctype="multipart/form-data" files="true">
-                        @csrf
-                        <div class="form-group">
-                          <label for="floor">ชั้น:</label>
-                          <input type="number" class="form-control" id="floor" name="floor_id" placeholder="ชั้น" required>
-                        </div>
-                        <div class="form-group">
-                                <label for="floor">ตู้:</label>
-                                <input type="number" class="form-control" id="floor" name="shelf" placeholder="ตู้" required>
-                              </div>
-                              <div class="form-group">
-                                    <label for="floor">หมวด:</label>
-                                    <input type="text" class="form-control" id="floor" name="call_b" placeholder="หมวด" required>
-                                  </div>
-                                  <br><br>
-                                  <div class="form-group">
-                                    <label for="floor">ภาษา:</label>
-                                    <select class=" form-control" name="language" >
-                                        <option value="" >--เลือกภาษา--</option>
-                                        <option value="tha" >ภาษาไทย</option>
-                                        <option value="eng" >ภาษาอังกฤษ</option>
 
 
-                                      </select>
-                                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-success">บันทึก</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                </div>
-              </div>
-            </form>
-            </div>
-          </div>
-   <a onclick="event.preventDefault();changeShelfForm();" href="#" class="btn btn-info" data-toggle="modal"> <span>ย้ายหมวดไปชั้นอื่น</span></a>
-   @include('partials.change_shelf')
+
+   <h4>หมวดหนังสือที่ได้ระบุชั้นและเลขตู้แล้ว</h4>
+
 </div>
       <div class="box-body">
         <div class="box-body table-responsive no-padding">
             <table id="category" class=" table table-hover table-striped">
                     <thead>
                     <tr>
-
                       <th>ชั้น</th>
                       <th>ตู้หนังสือ</th>
                       <th>หมวด</th>
                       <th>เพิ่มเติม</th>
                     </tr>
                     </thead>
-
-
-
-
-
                   </table>
+    </div>
+      </div>
+      <div class="box-footer">
+      </div>
+  </div>
 
+
+
+  <div class="box box-warning">
+    <div class="box-header with-border">
+        <h4>หมวดหนังสือที่ไม่ได้ระบุชั้นและเลขตู้</h4>
+
+</div>
+      <div class="box-body">
+        <div class="box-body table-responsive no-padding">
+            <table id="category2" class=" table table-hover table-striped">
+                    <thead>
+                    <tr>
+                      <th>ชั้น</th>
+                      <th>ตู้หนังสือ</th>
+                      <th>หมวด</th>
+                      <th>เพิ่มเติม</th>
+                    </tr>
+                    </thead>
+                  </table>
     </div>
       </div>
       <div class="box-footer">
@@ -261,6 +230,35 @@
             {"data":"action","searchable":false,"orderable":false}
         ]
     } );
+
+
+
+    $('#category2').DataTable( {
+
+"processing": true,
+"serverSide": true,
+"ajax": {
+    "url":"<?= route('dataProcessing2') ?>",
+    "dataType":"json",
+    "type":"POST",
+    "data":{"_token":"<?= csrf_token() ?>"}
+},
+"columns":[
+
+    {"data":"floor_id"},
+    {"data":"shelf"},
+    {"data":"call_b"},
+    {"data":"action","searchable":false,"orderable":false}
+]
+} );
+
+
+
+
+
+
+
+
 </script>
   <script type="text/javascript">
     $(function(){

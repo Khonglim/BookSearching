@@ -56,10 +56,11 @@ class BookcshelfController extends Controller
 
 
           if($x==1){
-            $data =[ 'flash' => 'ตู้ที่ท่านเลือกไม่มีอยู่ในระบบค่ะ',$p  ];
+            $data =[ 'flash' => $p
+                                  ];
             return response()->json([
                 'error' => true,
-                'task'  => $data,
+                'messages'  => $data
             ], 422);
 
 

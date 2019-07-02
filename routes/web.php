@@ -21,49 +21,8 @@ use Ixudra\Curl\Facades\Curl;
 
 
 Route::get('/', function () {
-
-
- //$data = DB::table('bookshelf')
- //->leftJoin('location_book', 'bookshelf.id_shelf', '=', 'location_book.shelf')->where('floor','=', 5)
- //->get();
-
-
-
-//dd($data);
-
-//$response = Curl::to('http://202.28.17.35/api4lib/api/index.php/GetListOfItmesFromCallNoRange/%7CaA/%7CaZ/bcm/tha')->asJson()->get();
-
-//$book = $response->ListOfItemsFromCallNoRange;
-//Bookapi::truncate();
-  //foreach ($book as $r) {
-     //   $bookapi = new Bookapi();
-    //    $bookapi->barcode = $r->barcode;
-   //     $bookapi->location_code = $r->location_code ;
-  //      $bookapi->bib_record_id = $r->bib_record_id ;
-   //     $bookapi->item_record_id = $r->item_record_id ;
-  //      $bookapi->best_title = $r->best_title ;
-  //      $bookapi->best_author = $r->best_author ;
-   //     $bookapi->item_status_code = $r->item_status_code ;
-  //      $bookapi->use3_count = $r->use3_count ;
-  //      $bookapi->copy_use_count = $r->copy_use_count ;
-  //      $bookapi->due_gmt = $r->due_gmt ;
-   //     $bookapi->language_code = $r->language_code ;
-
-    //    $e=explode("|",$r->callno);
-    //    $cut1=substr($e[1],1);
-//
-   //     $bookapi->callno =  $cut1;
-   //     $bookapi->group_code = $r->group_code ;
-   //     $bookapi->class = $r->class ;
-    //    $bookapi->class_x = $r->class_x ;
-    //   $bookapi->save();
-//}
-
-
 $pagination = Bookapi::orderBy('best_title', 'asc')->simplePaginate(16);
 $data  = array('pagination' =>$pagination , );
-
-
    return view('welcome',$data);
 });
 
@@ -88,7 +47,6 @@ Route::any ( '/search', function () {
 }
 
 
-
 return view ( 'welcome' )->withMessage ( 'ไม่พบหนังสือที่คุณค้นหา...' )->withQuery ( $q );
    });
 
@@ -108,6 +66,7 @@ Route::resource('shelfchange', 'ShelfChangeController');
 
 
 Route::resource('category', 'CategoryController');
+Route::get('categorych2','CategoryController@store2');
 Route::get('update/{id}','CategoryController@update');
 Route::get('destroy/{id}','CategoryController@destroy');
 Route::post('categorych','CategoryController@destroych');
@@ -128,6 +87,7 @@ Route::get('editBook/{id}', 'BookcshelfController@index')->middleware('auth');
 
 
 Route::post('allposts', 'PostController@postdata' )->name('dataProcessing');
+Route::post('allposts2', 'PostController@postdata2' )->name('dataProcessing2');
 
 
 Route::get('locationShow','BookcshelfController@locationshow');

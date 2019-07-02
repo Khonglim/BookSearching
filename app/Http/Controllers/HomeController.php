@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Book_SEC;
 use Yajra\Datatables\Datatables;
-use App\Bookapi;
+use App\Apibook;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function postdata(Request $request){
 
 
-        $book= Bookapi::all();
+        $book= Apibook::all();
         return datatables()->collection($book)->addColumn('action', function ($book) {
             return '<a href="/locationShow/'.$book->callno.'" class="btn btn-danger btn-xs"><i class="fa  fa-map"></i></a>
                 ';})->toJson();
@@ -59,10 +59,10 @@ class HomeController extends Controller
 
        $book = $output->ListOfItemsFromCallNoRange;
        $bookeng = $outputeng->ListOfItemsFromCallNoRange;
-       Bookapi::truncate();
+       Apibook::truncate();
        foreach ($book as $r) {
 
-           $bookapi = new Bookapi();
+           $bookapi = new Apibook();
            $bookapi->barcode = $r->barcode;
            $bookapi->location_code = $r->location_code ;
            $bookapi->bib_record_id = $r->bib_record_id ;
@@ -74,25 +74,24 @@ class HomeController extends Controller
            $bookapi->copy_use_count = $r->copy_use_count ;
            $bookapi->due_gmt = $r->due_gmt ;
            $bookapi->language_code = $r->language_code ;
-
             $e=explode("|",$r->callno);
             $cut1=substr($e[1],1);
-
             $bookapi->callno =  $cut1;
+            $count =  DB::table('location_book')->where('call_b', '=',$cut1)->where('language', '=',$r->language_code)->count();
+         if( $count == 0){
+            DB::insert('insert into location_book (call_b,language) values ("'.$cut1.'","'.$r->language_code.'")');
+            }
             $bookapi->group_code = $r->group_code ;
             $bookapi->class = $r->class ;
-             $bookapi->class_x = $r->class_x ;
-
-
-
-          $bookapi->save();
+            $bookapi->class_x = $r->class_x ;
+             $bookapi->save();
 
       }
 
 
       foreach ($bookeng as $r) {
 
-        $bookapi = new Bookapi();
+        $bookapi = new Apibook();
         $bookapi->barcode = $r->barcode;
         $bookapi->location_code = $r->location_code ;
         $bookapi->bib_record_id = $r->bib_record_id ;
@@ -104,20 +103,21 @@ class HomeController extends Controller
          $bookapi->copy_use_count = $r->copy_use_count ;
          $bookapi->due_gmt = $r->due_gmt ;
          $bookapi->language_code = $r->language_code ;
-
          $e=explode("|",$r->callno);
          $cut1=substr($e[1],1);
-
+         $bookapi->callno =  $cut1;
+         $count =  DB::table('location_book')->where('call_b', '=',$cut1)->where('language', '=',$r->language_code)->count();
+         if( $count == 0){
+            DB::insert('insert into location_book (call_b,language) values ("'.$cut1.'","'.$r->language_code.'")');
+         }
          $bookapi->callno =  $cut1;
          $bookapi->group_code = $r->group_code ;
          $bookapi->class = $r->class ;
-       $bookapi->class_x = $r->class_x ;
-
-
-
-       $bookapi->save();
+         $bookapi->class_x = $r->class_x ;
+         $bookapi->save();
 
     }
+
     Session::flash('flash_message',' อัพเดทข้อมูลสำเร็จ! ');
     return redirect('updatedata');
 
